@@ -20,8 +20,12 @@ const columnFields: Field[] = [
         value: 'oneThird',
       },
       {
-        label: 'Half',
+        label: 'One Half (Narrow)',
         value: 'half',
+      },
+      {
+        label: 'One Half (Wide)',
+        value: 'halfWide',
       },
       {
         label: 'Two Thirds',

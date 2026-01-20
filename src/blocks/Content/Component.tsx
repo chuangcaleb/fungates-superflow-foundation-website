@@ -12,6 +12,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const colsSpanClasses = {
     full: '12',
     half: '6',
+    halfWide: '6',
     oneThird: '4',
     twoThirds: '8',
   }
@@ -28,6 +29,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
               <div
                 className={cn(`space-y-6 col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
                   'md:col-span-2': size !== 'full',
+                  'md:col-span-4': size === 'halfWide',
                 })}
                 key={index}
               >
