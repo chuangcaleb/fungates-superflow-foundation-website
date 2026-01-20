@@ -5,15 +5,33 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import { cn } from '@/utilities/ui'
 
-export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText, align }) => {
   return (
     <div className="">
       <div className="container mb-8">
-        {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+        {richText && (
+          <RichText
+            className={cn('mb-6', {
+              'text-start': align === 'start',
+              'text-center': align === 'center',
+              'text-end': align === 'end',
+            })}
+            data={richText}
+            align={align}
+            enableGutter={false}
+          />
+        )}
 
         {Array.isArray(links) && links.length > 0 && (
-          <ul className="flex gap-4">
+          <ul
+            className={cn('flex gap-4', {
+              'md:justify-start': align === 'start',
+              'md:justify-center': align === 'center',
+              'md:justify-end': align === 'end',
+            })}
+          >
             {links.map(({ link }, i) => {
               return (
                 <li key={i}>
@@ -24,7 +42,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
           </ul>
         )}
       </div>
-      <div className="container ">
+      <div className="container">
         {media && typeof media === 'object' && (
           <div>
             <Media

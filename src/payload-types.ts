@@ -159,6 +159,7 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    align?: ('start' | 'center' | 'end') | null;
     richText?: {
       root: {
         type: string;
@@ -1061,6 +1062,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
+        align?: T;
         richText?: T;
         links?:
           | T

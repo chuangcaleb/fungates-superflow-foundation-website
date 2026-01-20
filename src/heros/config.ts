@@ -39,6 +39,30 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'align',
+      type: 'select',
+      defaultValue: 'start',
+      label: 'Align',
+      options: [
+        {
+          label: 'Start',
+          value: 'start',
+        },
+        {
+          label: 'Center',
+          value: 'center',
+        },
+        {
+          label: 'End',
+          value: 'end',
+        },
+      ],
+      required: true,
+      admin: {
+        condition: (_, { type } = {}) => type !== 'none',
+      },
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

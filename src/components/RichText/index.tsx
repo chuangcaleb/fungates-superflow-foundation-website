@@ -17,6 +17,7 @@ import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
+  Page,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -59,10 +60,11 @@ type Props = {
   data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
+  align?: Page['hero']['align']
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
+  const { className, enableProse = true, enableGutter = true, align, ...rest } = props
   return (
     <ConvertRichText
       converters={jsxConverters}
@@ -72,6 +74,11 @@ export default function RichText(props: Props) {
           container: enableGutter,
           'max-w-none': !enableGutter,
           'mx-auto prose md:prose-md': enableProse,
+        },
+        {
+          'text-start': align === 'start',
+          'text-center': align === 'center',
+          'text-end': align === 'end',
         },
         className,
       )}
