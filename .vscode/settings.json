@@ -36,5 +36,7 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     }
-  }
+  },
+  "editor.rulers": [100],
+  "editor.wordWrapColumn": 100
 }
