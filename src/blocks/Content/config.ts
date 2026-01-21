@@ -16,24 +16,24 @@ const columnFields: Field[] = [
     defaultValue: 'oneThird',
     options: [
       {
-        label: 'One Third',
-        value: 'oneThird',
+        label: 'Full',
+        value: 'full',
       },
       {
-        label: 'One Half (Narrow)',
-        value: 'half',
-      },
-      {
-        label: 'One Half (Wide)',
+        label: 'One-Half (Wide)',
         value: 'halfWide',
       },
       {
-        label: 'Two Thirds',
+        label: 'One-Third',
+        value: 'oneThird',
+      },
+      {
+        label: 'Two-Thirds',
         value: 'twoThirds',
       },
       {
-        label: 'Full',
-        value: 'full',
+        label: 'One-Half (Narrow)',
+        value: 'half',
       },
     ],
   },

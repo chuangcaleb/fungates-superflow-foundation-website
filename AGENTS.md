@@ -9,7 +9,7 @@ You are an expert Payload CMS developer. When working with Payload projects, fol
 3. **Type Generation**: Run `generate:types` script after schema changes
 4. **Transaction Safety**: Always pass `req` to nested operations in hooks
 5. **Access Control**: Understand Local API bypasses access control by default
-6. **Access Control**: Ensure roles exist when modifiyng collection or globals with access controls
+6. **Access Control**: Ensure roles exist when modifying collection or globals with access controls
 
 ### Code Validation
 
@@ -1134,8 +1134,8 @@ For deeper exploration of specific topics, refer to the context files located in
 
 ## Resources
 
-- Docs: https://payloadcms.com/docs
-- LLM Context: https://payloadcms.com/llms-full.txt
-- GitHub: https://github.com/payloadcms/payload
-- Examples: https://github.com/payloadcms/payload/tree/main/examples
-- Templates: https://github.com/payloadcms/payload/tree/main/templates
+- Docs: <https://payloadcms.com/docs>
+- LLM Context: <https://payloadcms.com/llms-full.txt>
+- GitHub: <https://github.com/payloadcms/payload>
+- Examples: <https://github.com/payloadcms/payload/tree/main/examples>
+- Templates: <https://github.com/payloadcms/payload/tree/main/templates>
