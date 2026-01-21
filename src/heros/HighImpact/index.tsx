@@ -22,7 +22,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
       data-theme="dark"
     >
       <div
-        className={cn('container mb-8 z-10 relative flex items-center', {
+        className={cn('container my-8 z-10 relative flex items-center', {
           'justify-start': align === 'start',
           'justify-center': align === 'center',
           'justify-end': align === 'end',
