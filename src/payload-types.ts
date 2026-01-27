@@ -420,6 +420,9 @@ export interface Category {
 export interface User {
   id: number;
   name: string;
+  /**
+   * (1) You cannot change your own role. (2) Admins can only manage the "Editor", "Author" and "None" roles.
+   */
   role: 'superadmin' | 'admin' | 'editor' | 'author' | 'none';
   updatedAt: string;
   createdAt: string;
