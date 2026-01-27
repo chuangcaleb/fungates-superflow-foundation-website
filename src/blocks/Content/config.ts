@@ -13,7 +13,7 @@ const columnFields: Field[] = [
   {
     name: 'size',
     type: 'select',
-    defaultValue: 'oneThird',
+    defaultValue: 'full',
     options: [
       {
         label: 'Full',
@@ -21,7 +21,7 @@ const columnFields: Field[] = [
       },
       {
         label: 'One-Half (Wide)',
-        value: 'halfWide',
+        value: 'oneHalfWide',
       },
       {
         label: 'One-Third',
@@ -33,7 +33,7 @@ const columnFields: Field[] = [
       },
       {
         label: 'One-Half (Narrow)',
-        value: 'half',
+        value: 'oneHalfNarrow',
       },
     ],
   },

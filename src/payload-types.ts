@@ -159,7 +159,7 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    align?: ('start' | 'center' | 'end') | null;
+    justify?: ('start' | 'center' | 'end') | null;
     richText?: {
       root: {
         type: string;
@@ -493,7 +493,7 @@ export interface CallToActionBlock {
 export interface ContentBlock {
   columns?:
     | {
-        size?: ('full' | 'halfWide' | 'oneThird' | 'twoThirds' | 'half') | null;
+        size?: ('full' | 'oneHalfWide' | 'oneThird' | 'twoThirds' | 'oneHalfNarrow') | null;
         richText?: {
           root: {
             type: string;
@@ -1062,7 +1062,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
-        align?: T;
+        justify?: T;
         richText?: T;
         links?:
           | T

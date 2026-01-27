@@ -39,10 +39,10 @@ export const hero: Field = {
       required: true,
     },
     {
-      name: 'align',
+      name: 'justify',
       type: 'select',
       defaultValue: 'start',
-      label: 'Align',
+      label: 'Justify',
       options: [
         {
           label: 'Start',
