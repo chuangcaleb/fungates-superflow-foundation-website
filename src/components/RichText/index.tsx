@@ -60,11 +60,11 @@ type Props = {
   data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
-  align?: Page['hero']['align']
+  justify?: Page['hero']['justify']
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, align, ...rest } = props
+  const { className, enableProse = true, enableGutter = true, justify, ...rest } = props
   return (
     <ConvertRichText
       converters={jsxConverters}
@@ -76,9 +76,9 @@ export default function RichText(props: Props) {
           'mx-auto prose md:prose-md': enableProse,
         },
         {
-          'text-start': align === 'start',
-          'text-center': align === 'center',
-          'text-end': align === 'end',
+          'text-start': justify === 'start',
+          'text-center': justify === 'center',
+          'text-end': justify === 'end',
         },
         className,
       )}

@@ -9,7 +9,7 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText, align }) => {
+export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText, justify }) => {
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
@@ -23,21 +23,21 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
     >
       <div
         className={cn('container my-8 z-10 relative flex items-center', {
-          'justify-start': align === 'start',
-          'justify-center': align === 'center',
-          'justify-end': align === 'end',
+          'justify-start': justify === 'start',
+          'justify-center': justify === 'center',
+          'justify-end': justify === 'end',
         })}
       >
         <div className={'max-w-[36.5rem]'}>
           {richText && (
-            <RichText className="mb-6" data={richText} align={align} enableGutter={false} />
+            <RichText className="mb-6" data={richText} justify={justify} enableGutter={false} />
           )}
           {Array.isArray(links) && links.length > 0 && (
             <ul
               className={cn('flex gap-4', {
-                'md:justify-start': align === 'start',
-                'md:justify-center': align === 'center',
-                'md:justify-end': align === 'end',
+                'md:justify-start': justify === 'start',
+                'md:justify-center': justify === 'center',
+                'md:justify-end': justify === 'end',
               })}
             >
               {links.map(({ link }, i) => {

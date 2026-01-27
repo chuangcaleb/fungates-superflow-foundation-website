@@ -7,19 +7,19 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 
-export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText, align }) => {
+export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText, justify }) => {
   return (
     <div className="">
       <div className="container mb-8">
         {richText && (
           <RichText
             className={cn('mb-6', {
-              'text-start': align === 'start',
-              'text-center': align === 'center',
-              'text-end': align === 'end',
+              'text-start': justify === 'start',
+              'text-center': justify === 'center',
+              'text-end': justify === 'end',
             })}
             data={richText}
-            align={align}
+            justify={justify}
             enableGutter={false}
           />
         )}
@@ -27,9 +27,9 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
         {Array.isArray(links) && links.length > 0 && (
           <ul
             className={cn('flex gap-4', {
-              'md:justify-start': align === 'start',
-              'md:justify-center': align === 'center',
-              'md:justify-end': align === 'end',
+              'md:justify-start': justify === 'start',
+              'md:justify-center': justify === 'center',
+              'md:justify-end': justify === 'end',
             })}
           >
             {links.map(({ link }, i) => {
