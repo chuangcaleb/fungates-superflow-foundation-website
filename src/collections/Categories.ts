@@ -1,19 +1,21 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated'
+import { author } from '@/access/role/author'
+import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
 import { slugField } from 'payload'
+import { anyone } from '../access/anyone'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: author,
+    delete: author,
     read: anyone,
-    update: authenticated,
+    update: author,
   },
   admin: {
     useAsTitle: 'title',
+    hidden: ({ user }) => !getMinRoleLevel(user.role, 'author'),
   },
   fields: [
     {

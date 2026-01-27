@@ -12,6 +12,9 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { admin } from '@/access/role/admin'
+import { authenticated } from '@/access/authenticated'
+import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
@@ -41,6 +44,15 @@ export const plugins: Plugin[] = [
           return field
         })
       },
+      access: {
+        create: admin,
+        delete: admin,
+        read: authenticated,
+        update: admin,
+      },
+      admin: {
+        hidden: ({ user }) => !getMinRoleLevel(user.role, 'admin'),
+      },
       hooks: {
         afterChange: [revalidateRedirects],
       },
@@ -58,6 +70,7 @@ export const plugins: Plugin[] = [
     fields: {
       payment: false,
     },
+
     formOverrides: {
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {

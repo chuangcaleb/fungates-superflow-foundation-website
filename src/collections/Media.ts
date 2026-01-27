@@ -8,8 +8,9 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import { author } from '@/access/role/author'
+import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
 import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,10 +19,13 @@ export const Media: CollectionConfig = {
   slug: 'media',
   folders: true,
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: author,
+    delete: author,
     read: anyone,
-    update: authenticated,
+    update: author,
+  },
+  admin: {
+    hidden: ({ user }) => !getMinRoleLevel(user.role, 'author'),
   },
   fields: [
     {

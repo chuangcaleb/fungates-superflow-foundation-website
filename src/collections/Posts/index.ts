@@ -9,8 +9,6 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -18,6 +16,9 @@ import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { author } from '@/access/role/author'
+import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -30,10 +31,10 @@ import { slugField } from 'payload'
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: author,
+    delete: author,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: author,
   },
   // This config controls what's populated by default when a post is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
@@ -57,6 +58,7 @@ export const Posts: CollectionConfig<'posts'> = {
           req,
         }),
     },
+    hidden: ({ user }) => !getMinRoleLevel(user.role, 'author'),
     preview: (data, { req }) =>
       generatePreviewPath({
         slug: data?.slug as string,

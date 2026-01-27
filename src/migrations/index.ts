@@ -4,6 +4,7 @@ import * as migration_20260120_152847 from './20260120_152847';
 import * as migration_20260121_122552 from './20260121_122552';
 import * as migration_20260127_124044_rename_hero_align_to_justify from './20260127_124044_rename_hero_align_to_justify';
 import * as migration_20260127_125924_content_size_one_halves from './20260127_125924_content_size_one_halves';
+import * as migration_20260127_135332_user_roles from './20260127_135332_user_roles';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260127_125924_content_size_one_halves.up,
     down: migration_20260127_125924_content_size_one_halves.down,
-    name: '20260127_125924_content_size_one_halves'
+    name: '20260127_125924_content_size_one_halves',
+  },
+  {
+    up: migration_20260127_135332_user_roles.up,
+    down: migration_20260127_135332_user_roles.down,
+    name: '20260127_135332_user_roles'
   },
 ];
