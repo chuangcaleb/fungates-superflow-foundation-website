@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { hero } from '@/heros/config'
+import { hero } from '@/components/heros/config'
 import { slugField } from 'payload'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'

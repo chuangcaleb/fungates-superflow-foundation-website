@@ -8,7 +8,7 @@ import { cache } from 'react'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { RenderHero } from '@/heros/RenderHero'
+import { RenderHero } from '@/components/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 
