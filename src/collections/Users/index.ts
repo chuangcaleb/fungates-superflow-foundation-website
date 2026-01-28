@@ -14,7 +14,7 @@ export const Users: CollectionConfig = {
     update: admin,
   },
   admin: {
-    defaultColumns: ['name', 'email'],
+    defaultColumns: ['name', 'email', 'role'],
     useAsTitle: 'name',
     hidden: ({ user }) => !getMinRoleLevel(user.role, 'admin'),
   },
