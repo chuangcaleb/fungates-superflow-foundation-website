@@ -498,7 +498,7 @@ export interface ContentBlock {
   columns?:
     | {
         size?: ('full' | 'oneHalfWide' | 'oneThird' | 'twoThirds' | 'oneHalfNarrow') | null;
-        align?: ('start' | 'center' | 'end') | null;
+        variant?: ('align-start' | 'align-center' | 'card') | null;
         richText?: {
           root: {
             type: string;
@@ -1143,7 +1143,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | T
     | {
         size?: T;
-        align?: T;
+        variant?: T;
         richText?: T;
         media?: T;
         enableLink?: T;

@@ -44,21 +44,21 @@ const columnFields: Field[] = [
         },
       },
       {
-        name: 'align',
+        name: 'variant',
         type: 'select',
-        defaultValue: 'start',
+        defaultValue: 'align-start',
         options: [
           {
-            label: 'Start',
-            value: 'start',
+            label: 'Align: Start',
+            value: 'align-start',
           },
           {
-            label: 'Center',
-            value: 'center',
+            label: 'Align: Center',
+            value: 'align-center',
           },
           {
-            label: 'End',
-            value: 'end',
+            label: 'Card',
+            value: 'card',
           },
         ],
         admin: {
