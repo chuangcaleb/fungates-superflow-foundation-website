@@ -25,7 +25,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, richText, size, media } = col
+            const { enableLink, link, richText, size, media, align } = col
             const richTextContent = richText?.root.children
             const isEmptyRichText =
               !!richTextContent &&
@@ -36,10 +36,19 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
             return (
               <div
-                className={cn(`space-y-6 col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
-                  'md:col-span-2': size !== 'full',
-                  'md:col-span-4': size === 'oneHalfWide',
-                })}
+                className={cn(
+                  `space-y-6 col-span-4 lg:col-span-${colsSpanClasses[size!]} h-full`,
+                  {
+                    'md:col-span-2': size !== 'full',
+                    'md:col-span-4': size === 'oneHalfWide',
+                  },
+                  align && 'grid place-items-start',
+                  {
+                    'place-content-start': align === 'start',
+                    'place-content-center': align === 'center',
+                    'place-content-end': align === 'end',
+                  },
+                )}
                 key={index}
               >
                 {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}

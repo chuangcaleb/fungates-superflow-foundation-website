@@ -11,29 +11,59 @@ import { link } from '@/fields/link'
 
 const columnFields: Field[] = [
   {
-    name: 'size',
-    type: 'select',
-    defaultValue: 'full',
-    options: [
+    type: 'row',
+    fields: [
       {
-        label: 'Full',
-        value: 'full',
+        name: 'size',
+        type: 'select',
+        defaultValue: 'full',
+        options: [
+          {
+            label: 'Full',
+            value: 'full',
+          },
+          {
+            label: 'One-Half (Wide)',
+            value: 'oneHalfWide',
+          },
+          {
+            label: 'One-Third',
+            value: 'oneThird',
+          },
+          {
+            label: 'Two-Thirds',
+            value: 'twoThirds',
+          },
+          {
+            label: 'One-Half (Narrow)',
+            value: 'oneHalfNarrow',
+          },
+        ],
+        admin: {
+          width: '50%',
+        },
       },
       {
-        label: 'One-Half (Wide)',
-        value: 'oneHalfWide',
-      },
-      {
-        label: 'One-Third',
-        value: 'oneThird',
-      },
-      {
-        label: 'Two-Thirds',
-        value: 'twoThirds',
-      },
-      {
-        label: 'One-Half (Narrow)',
-        value: 'oneHalfNarrow',
+        name: 'align',
+        type: 'select',
+        defaultValue: 'start',
+        options: [
+          {
+            label: 'Start',
+            value: 'start',
+          },
+          {
+            label: 'Center',
+            value: 'center',
+          },
+          {
+            label: 'End',
+            value: 'end',
+          },
+        ],
+        admin: {
+          width: '50%',
+        },
       },
     ],
   },

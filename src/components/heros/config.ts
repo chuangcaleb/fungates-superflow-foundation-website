@@ -42,7 +42,6 @@ export const hero: Field = {
       name: 'justify',
       type: 'select',
       defaultValue: 'start',
-      label: 'Justify',
       options: [
         {
           label: 'Start',
