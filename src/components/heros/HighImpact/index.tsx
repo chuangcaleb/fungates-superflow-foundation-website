@@ -18,7 +18,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
+      className="relative -mt-[6.2rem] flex items-center justify-center text-foreground"
       data-theme="dark"
     >
       <div
@@ -28,7 +28,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
           'justify-end': justify === 'end',
         })}
       >
-        <div className={'max-w-[36.5rem]'}>
+        <div className="max-w-[36.5rem]">
           {richText && (
             <RichText className="mb-6" data={richText} justify={justify} enableGutter={false} />
           )}

@@ -9,8 +9,15 @@ import { cn } from '@/utilities/ui'
 
 export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText, justify }) => {
   return (
-    <div className="">
-      <div className="container mb-8">
+    <div
+      className={cn('relative text-foreground h-full container flex items-center', {
+        'justify-start': justify === 'start',
+        'justify-center': justify === 'center',
+        'justify-end': justify === 'end',
+      })}
+      data-theme="dark"
+    >
+      <div className="my-8 max-w-[36.5rem]">
         {richText && (
           <RichText
             className={cn('mb-6', {
@@ -42,12 +49,13 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
           </ul>
         )}
       </div>
-      <div className="container">
+      <div className="select-none min-h-[min(65vh,800px)]">
         {media && typeof media === 'object' && (
           <div>
             <Media
               className="-mx-4 md:-mx-8 2xl:-mx-16"
-              imgClassName=""
+              imgClassName="-z-10 object-cover"
+              fill
               priority
               resource={media}
             />
@@ -58,6 +66,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
             )}
           </div>
         )}
+        {/* <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" /> */}
       </div>
     </div>
   )
