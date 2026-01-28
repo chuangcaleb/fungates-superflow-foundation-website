@@ -513,6 +513,7 @@ export interface ContentBlock {
           };
           [k: string]: unknown;
         } | null;
+        media?: (number | null) | Media;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom') | null;
@@ -1142,6 +1143,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | {
         size?: T;
         richText?: T;
+        media?: T;
         enableLink?: T;
         link?:
           | T

@@ -1,9 +1,11 @@
+import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import RichText from '@/components/RichText'
 
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 
+import { Media } from '@/components/Media'
+import { isObject } from '@/utilities/deepMerge'
 import { CMSLink } from '../../components/Link'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
@@ -23,7 +25,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, richText, size } = col
+            const { enableLink, link, richText, size, media } = col
+            const richTextContent = richText?.root.children
+            const isEmptyRichText =
+              !!richTextContent &&
+              richTextContent.length === 1 &&
+              'children' in richTextContent[0] &&
+              Array.isArray(richTextContent[0].children) &&
+              richTextContent[0].children.length === 0
 
             return (
               <div
@@ -33,8 +42,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 })}
                 key={index}
               >
-                {richText && <RichText data={richText} enableGutter={false} />}
-
+                {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}
+                {isEmptyRichText && isObject(media) && <Media resource={media} />}
                 {enableLink && <CMSLink {...link} />}
               </div>
             )

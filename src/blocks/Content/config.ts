@@ -53,6 +53,12 @@ const columnFields: Field[] = [
     label: false,
   },
   {
+    name: 'media',
+    type: 'upload',
+    label: 'Optional image',
+    relationTo: 'media',
+  },
+  {
     name: 'enableLink',
     type: 'checkbox',
   },
