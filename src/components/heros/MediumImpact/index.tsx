@@ -12,7 +12,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
     <div className="container">
       <div
         className={cn(
-          'relative -mx-[var(--gutter-custom)] flex h-full items-center px-[var(--gutter-custom)] text-foreground [--gutter-custom:calc(var(--gutter)/2)]',
+          'relative -mx-[var(--gutter-custom)] flex h-full items-end px-[var(--gutter-custom)] text-foreground [--gutter-custom:calc(var(--gutter)/2)]',
           {
             'justify-start': justify === 'start',
             'justify-center': justify === 'center',
