@@ -18,7 +18,14 @@ type Props = MediaBlockProps & {
 }
 
 export const MediaBlock: React.FC<Props> = (props) => {
-  const { showCaption, className, enableGutter = true, imgClassName, media, staticImage } = props
+  const {
+    showCaption = true,
+    className,
+    enableGutter = true,
+    imgClassName,
+    media,
+    staticImage,
+  } = props
 
   let caption
   if (media && typeof media === 'object') caption = media.caption
@@ -33,7 +40,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
         />
       )}
       {showCaption && caption && (
-        <div className="mt-2 text-slate-700">
+        <div className="mt-4 text-slate-700">
           <RichText data={caption} enableGutter={false} />
         </div>
       )}
