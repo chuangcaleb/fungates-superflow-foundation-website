@@ -93,6 +93,13 @@
   }
 }
 
+.container {
+  width: unset;
+  --gutter: max(1rem, min(3vw, 4rem));
+  margin-inline: var(--gutter);
+  padding-inline: var(--gutter);
+}
+
 /* html {
   opacity: 0;
 }
