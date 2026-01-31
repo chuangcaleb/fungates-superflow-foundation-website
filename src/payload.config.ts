@@ -12,6 +12,7 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { Contact } from './globals/Contact/config'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { plugins } from './plugins'
@@ -74,7 +75,7 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
-  globals: [Header, Footer],
+  globals: [Header, Contact, Footer],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

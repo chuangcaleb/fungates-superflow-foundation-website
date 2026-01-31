@@ -111,10 +111,12 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     header: Header;
+    contact: Contact;
     footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
@@ -1670,6 +1672,66 @@ export interface Header {
   createdAt?: string | null;
 }
 /**
+ * Site contact information and social links
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  contacts?:
+    | {
+        label: string;
+        type: 'phone' | 'email';
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  locations?:
+    | {
+        address?: string | null;
+        contacts?:
+          | {
+              label: string;
+              type: 'phone' | 'email';
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  bottomText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  socialLinks?:
+    | {
+        label: string;
+        url: string;
+        /**
+         * Select a Phosphor icon name from https://phosphoricons.com/?q=logo. Use the Phosphor icon export name (e.g. TwitterLogo, GithubLogo).
+         */
+        icon: string;
+        target?: ('_self' | '_blank') | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
@@ -1715,6 +1777,47 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  contacts?:
+    | T
+    | {
+        label?: T;
+        type?: T;
+        value?: T;
+        id?: T;
+      };
+  locations?:
+    | T
+    | {
+        address?: T;
+        contacts?:
+          | T
+          | {
+              label?: T;
+              type?: T;
+              value?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  bottomText?: T;
+  socialLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        icon?: T;
+        target?: T;
         id?: T;
       };
   updatedAt?: T;

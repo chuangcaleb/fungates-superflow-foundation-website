@@ -8,6 +8,7 @@ import * as migration_20260127_135332_user_roles from './20260127_135332_user_ro
 import * as migration_20260128_122115_content_media from './20260128_122115_content_media';
 import * as migration_20260128_133349_content_align from './20260128_133349_content_align';
 import * as migration_20260128_145512_content_variant from './20260128_145512_content_variant';
+import * as migration_20260131_102644_contact_config from './20260131_102644_contact_config';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20260128_145512_content_variant.up,
     down: migration_20260128_145512_content_variant.down,
-    name: '20260128_145512_content_variant'
+    name: '20260128_145512_content_variant',
+  },
+  {
+    up: migration_20260131_102644_contact_config.up,
+    down: migration_20260131_102644_contact_config.down,
+    name: '20260131_102644_contact_config'
   },
 ];
