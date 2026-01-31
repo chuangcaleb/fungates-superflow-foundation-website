@@ -47,6 +47,8 @@
     --success: 196 52% 74%;
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
+
+    --gutter: max(0.5rem, min(4vw, 7rem));
   }
 
   [data-theme='dark'] {
@@ -94,10 +96,10 @@
 }
 
 .container {
-  width: unset;
-  --gutter: max(1rem, min(3vw, 4rem));
-  margin-inline: var(--gutter);
+  width: 100%;
+  max-width: 90rem;
   padding-inline: var(--gutter);
+  margin-inline: auto;
 }
 
 /* html {
