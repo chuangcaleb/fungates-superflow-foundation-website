@@ -48,7 +48,7 @@
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
 
-    --gutter: max(0.5rem, min(4vw, 7rem));
+    --gutter: max(1rem, min(3vw, 4rem));
   }
 
   [data-theme='dark'] {
