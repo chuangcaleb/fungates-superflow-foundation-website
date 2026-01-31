@@ -15,7 +15,7 @@ import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
-  CallToActionBlock as CTABlockProps,
+  ContactBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
   Page,
 } from '@/payload-types'
@@ -46,9 +46,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         className="col-span-3 col-start-1"
         imgClassName="m-0"
         {...node.fields}
-        captionClassName="mx-auto max-w-[48rem]"
+        // captionClassName="mx-auto max-w-[48rem]"
         enableGutter={false}
-        disableInnerContainer={true}
+        // disableInnerContainer={true}
       />
     ),
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
