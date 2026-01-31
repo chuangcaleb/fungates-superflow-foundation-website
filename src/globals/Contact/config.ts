@@ -1,4 +1,5 @@
 import type { Field, GlobalConfig } from 'payload'
+import { revalidateContact } from './hooks/revalidateContact'
 
 const contacts: Field = {
   name: 'contacts',
@@ -101,6 +102,9 @@ export const Contact: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateContact],
+  },
 }
 
 export default Contact
