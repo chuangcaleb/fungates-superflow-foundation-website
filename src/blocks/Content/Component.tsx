@@ -38,7 +38,7 @@ const Column = ({ col }: { col: TColumn }) => {
   if (variant === 'card') {
     return (
       <div className={columnClassName}>
-        <Card className={cn('gap-8 h-full flex flex-col justify-between', !hasMedia && 'p-6')}>
+        <Card className={cn('flex h-full flex-col justify-between gap-8', !hasMedia && 'p-6')}>
           <div className={cn('space-y-4', hasMedia && 'p-4 pb-0')}>
             {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}
             {enableLink && <CMSLink {...link} />}
@@ -68,7 +68,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
   return (
     <div className="container my-28">
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-8">
+      <div className="grid grid-cols-4 gap-x-8 gap-y-8 lg:grid-cols-12">
         {columns && columns.map((col) => !!col.id && <Column col={col} key={col.id} />)}
       </div>
     </div>

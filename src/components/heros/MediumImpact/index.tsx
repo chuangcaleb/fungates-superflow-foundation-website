@@ -10,7 +10,7 @@ import { cn } from '@/utilities/ui'
 export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richText, justify }) => {
   return (
     <div
-      className={cn('relative text-foreground h-full container flex items-center', {
+      className={cn('container relative flex h-full items-center text-foreground', {
         'justify-start': justify === 'start',
         'justify-center': justify === 'center',
         'justify-end': justify === 'end',
@@ -49,7 +49,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({ links, media, richTex
           </ul>
         )}
       </div>
-      <div className="select-none min-h-[min(65vh,800px)]">
+      <div className="min-h-[min(65vh,800px)] select-none">
         {media && typeof media === 'object' && (
           <div>
             <Media
