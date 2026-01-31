@@ -39,11 +39,11 @@ const Column = ({ col }: { col: TColumn }) => {
     return (
       <div className={columnClassName}>
         <Card className={cn('flex h-full flex-col justify-between gap-8', !hasMedia && 'p-6')}>
-          <div className={cn('space-y-4', hasMedia && 'p-4 pb-0')}>
+          <div className={cn('space-y-4', hasMedia && 'p-6 pb-0')}>
             {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}
             {enableLink && <CMSLink {...link} />}
           </div>
-          {hasMedia && <Media resource={media} />}
+          {hasMedia && <Media imgClassName="rounded-b-xl" resource={media} />}
         </Card>
       </div>
     )
@@ -57,7 +57,7 @@ const Column = ({ col }: { col: TColumn }) => {
       })}
     >
       {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}
-      {isEmptyRichText && hasMedia && <Media resource={media} />}
+      {isEmptyRichText && hasMedia && <Media imgClassName="rounded-xl" resource={media} />}
       {enableLink && <CMSLink {...link} />}
     </div>
   )
