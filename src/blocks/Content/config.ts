@@ -85,7 +85,7 @@ const columnFields: Field[] = [
   {
     name: 'media',
     type: 'upload',
-    label: 'Optional image',
+    label: 'Image (optional)',
     relationTo: 'media',
   },
   {
