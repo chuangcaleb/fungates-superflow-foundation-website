@@ -17,7 +17,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
   })
 
   return (
-    <div className="relative -mt-[6.2rem] flex items-center text-foreground" data-theme="dark">
+    <div
+      className="relative -mt-[var(--header-height)] flex items-center pt-[calc(var(--header-height)*2/3)] text-foreground [--header-height:6.2rem]"
+      data-theme="dark"
+    >
       <div
         className={cn('container relative z-10 my-8 flex flex-1 items-center', {
           'justify-start': justify === 'start',
@@ -48,7 +51,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText,
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="min-h-[75vh] select-none">
         {media && typeof media === 'object' && (
           <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
         )}
