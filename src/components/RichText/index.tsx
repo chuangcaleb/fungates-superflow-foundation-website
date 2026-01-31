@@ -15,7 +15,7 @@ import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
-  ContactBlock as CTABlockProps,
+  CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
   Page,
 } from '@/payload-types'
