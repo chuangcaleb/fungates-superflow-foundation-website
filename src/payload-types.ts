@@ -113,11 +113,13 @@ export interface Config {
     header: Header;
     contact: Contact;
     footer: Footer;
+    nav: Nav;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    nav: NavSelect<false> | NavSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1783,6 +1785,83 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nav".
+ */
+export interface Nav {
+  id: number;
+  items?:
+    | {
+        item?: {
+          isSingleLink?: boolean | null;
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          label?: string | null;
+          items?:
+            | {
+                item?: {
+                  isSingleLink?: boolean | null;
+                  link?: {
+                    type?: ('reference' | 'custom') | null;
+                    newTab?: boolean | null;
+                    reference?:
+                      | ({
+                          relationTo: 'pages';
+                          value: number | Page;
+                        } | null)
+                      | ({
+                          relationTo: 'posts';
+                          value: number | Post;
+                        } | null);
+                    url?: string | null;
+                    label: string;
+                  };
+                  label?: string | null;
+                  links?:
+                    | {
+                        link: {
+                          type?: ('reference' | 'custom') | null;
+                          newTab?: boolean | null;
+                          reference?:
+                            | ({
+                                relationTo: 'pages';
+                                value: number | Page;
+                              } | null)
+                            | ({
+                                relationTo: 'posts';
+                                value: number | Post;
+                              } | null);
+                          url?: string | null;
+                          label: string;
+                        };
+                        id?: string | null;
+                      }[]
+                    | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1861,6 +1940,69 @@ export interface FooterSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nav_select".
+ */
+export interface NavSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        item?:
+          | T
+          | {
+              isSingleLink?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              label?: T;
+              items?:
+                | T
+                | {
+                    item?:
+                      | T
+                      | {
+                          isSingleLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          label?: T;
+                          links?:
+                            | T
+                            | {
+                                link?:
+                                  | T
+                                  | {
+                                      type?: T;
+                                      newTab?: T;
+                                      reference?: T;
+                                      url?: T;
+                                      label?: T;
+                                    };
+                                id?: T;
+                              };
+                        };
+                    id?: T;
+                  };
             };
         id?: T;
       };

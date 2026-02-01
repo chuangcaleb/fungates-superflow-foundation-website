@@ -17,6 +17,7 @@ import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { plugins } from './plugins'
 import { getServerSideURL } from './utilities/getURL'
+import { Nav } from './globals/Nav/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -75,7 +76,7 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
-  globals: [Header, Contact, Footer],
+  globals: [Header, Contact, Footer, Nav],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

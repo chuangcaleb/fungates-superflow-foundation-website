@@ -12,6 +12,7 @@ import * as migration_20260131_102644_contact_config from './20260131_102644_con
 import * as migration_20260201_073519_contact_address_title from './20260201_073519_contact_address_title';
 import * as migration_20260201_080321_contact_location_title from './20260201_080321_contact_location_title';
 import * as migration_20260201_082128_remove_contact_link from './20260201_082128_remove_contact_link';
+import * as migration_20260201_151920_nav_config from './20260201_151920_nav_config';
 
 export const migrations = [
   {
@@ -82,6 +83,11 @@ export const migrations = [
   {
     up: migration_20260201_082128_remove_contact_link.up,
     down: migration_20260201_082128_remove_contact_link.down,
-    name: '20260201_082128_remove_contact_link'
+    name: '20260201_082128_remove_contact_link',
+  },
+  {
+    up: migration_20260201_151920_nav_config.up,
+    down: migration_20260201_151920_nav_config.down,
+    name: '20260201_151920_nav_config'
   },
 ];
