@@ -34,11 +34,21 @@ const contacts: Field = {
 
 export const Contact: GlobalConfig = {
   slug: 'contact',
+  label: 'Contact Information',
   admin: {
     description: 'Site contact information and social links',
   },
   fields: [
     { ...contacts, label: 'Contacts (Shared)' },
+
+    {
+      name: 'bottomText',
+      label: 'Bottom Text',
+      type: 'richText',
+      admin: {
+        description: 'Always displayed below wherever shared contact information is displayed.',
+      },
+    },
 
     {
       name: 'locations',
@@ -59,11 +69,6 @@ export const Contact: GlobalConfig = {
         },
         contacts,
       ],
-    },
-    {
-      name: 'bottomText',
-      label: 'Bottom Text',
-      type: 'richText',
     },
 
     {

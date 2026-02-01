@@ -1705,21 +1705,9 @@ export interface Contact {
         id?: string | null;
       }[]
     | null;
-  locations?:
-    | {
-        title: string;
-        address?: string | null;
-        contacts?:
-          | {
-              label: string;
-              type: 'phone' | 'email';
-              value: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Always displayed below wherever shared contact information is displayed.
+   */
   bottomText?: {
     root: {
       type: string;
@@ -1735,6 +1723,21 @@ export interface Contact {
     };
     [k: string]: unknown;
   } | null;
+  locations?:
+    | {
+        title: string;
+        address?: string | null;
+        contacts?:
+          | {
+              label: string;
+              type: 'phone' | 'email';
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   socialLinks?:
     | {
         label: string;
@@ -1814,6 +1817,7 @@ export interface ContactSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  bottomText?: T;
   locations?:
     | T
     | {
@@ -1829,7 +1833,6 @@ export interface ContactSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  bottomText?: T;
   socialLinks?:
     | T
     | {

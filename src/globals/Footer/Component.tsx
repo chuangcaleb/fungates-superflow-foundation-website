@@ -7,6 +7,7 @@ import { Icon } from '@/components/Icon'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 import ContactListItem from '@/components/ContactListItem'
+import RichText from '@/components/RichText'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
@@ -28,11 +29,22 @@ export async function Footer() {
             })}
           </nav>
           <h3 className="sr-only">Contact</h3>
-          <ul className="space-y-1">
-            {contactData.contacts?.map((contact) => (
-              <ContactListItem contact={contact} key={contact.id} />
-            ))}
-          </ul>
+          {!!contactData.contacts?.length && contactData.bottomText && (
+            <section className="space-y-4">
+              <ul className="space-y-1">
+                {contactData.contacts?.map((contact) => (
+                  <ContactListItem contact={contact} key={contact.id} />
+                ))}
+              </ul>
+              {contactData.bottomText && (
+                <RichText
+                  className="text-muted-foreground"
+                  data={contactData.bottomText}
+                  enableGutter={false}
+                />
+              )}
+            </section>
+          )}
           <h3 className="sr-only">Social Links</h3>
           <ul className="flex gap-6">
             {contactData.socialLinks?.map((link) => (
