@@ -6,6 +6,7 @@ import type { Contact, Footer } from '@/payload-types'
 import { Icon } from '@/components/Icon'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
+import ContactListItem from '@/components/ContactListItem'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
@@ -29,26 +30,17 @@ export async function Footer() {
           <h3 className="sr-only">Contact</h3>
           <ul className="space-y-1">
             {contactData.contacts?.map((contact) => (
-              <li className="flex items-center gap-2" key={contact.id}>
-                <Icon
-                  name={contact.type === 'email' ? 'envelope-icon' : 'phone-call-icon'}
-                  fallback="Question"
-                  size={24}
-                />
-                <p className="space-x-2">
-                  <b>{contact.label}</b> <span>{contact.value}</span>
-                </p>
-              </li>
+              <ContactListItem contact={contact} key={contact.id} />
             ))}
           </ul>
           <h3 className="sr-only">Social Links</h3>
-          <ul className="flex gap-4">
+          <ul className="flex gap-6">
             {contactData.socialLinks?.map((link) => (
               <li key={link.id}>
-                <a href={link.url} title={link.label} {...(link.target && { target: link.target })}>
+                <CMSLink {...link} label={undefined} newTab>
                   <Icon name={link.icon} fallback="Question" size={40} />
                   <span className="sr-only">{link.label}</span>
-                </a>
+                </CMSLink>
               </li>
             ))}
           </ul>

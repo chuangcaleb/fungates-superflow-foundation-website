@@ -14,6 +14,7 @@ import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { editor } from '@/access/role/editor'
 import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
+import { ContactBlock } from '@/blocks/ContactBlock/config'
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -74,7 +75,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, ContactBlock],
               required: true,
               admin: {
                 initCollapsed: true,

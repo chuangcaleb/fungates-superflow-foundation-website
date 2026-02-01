@@ -47,8 +47,13 @@ export const Contact: GlobalConfig = {
       minRows: 0,
       fields: [
         {
+          name: 'title',
+          type: 'text',
+          admin: { width: '50%' },
+          required: true,
+        },
+        {
           name: 'address',
-          label: 'Address',
           type: 'textarea',
           admin: { width: '50%' },
         },
@@ -88,16 +93,6 @@ export const Contact: GlobalConfig = {
               'Select a Phosphor icon name from https://phosphoricons.com/?q=logo. Use the Phosphor icon export name (e.g. TwitterLogo, GithubLogo).',
           },
           required: true,
-        },
-        {
-          name: 'target',
-          label: 'Target',
-          type: 'select',
-          options: [
-            { label: 'Same window', value: '_self' },
-            { label: 'New window', value: '_blank' },
-          ],
-          defaultValue: '_blank',
         },
       ],
     },
