@@ -114,7 +114,7 @@ const config = {
                 fontSize: '2.5rem',
               },
               h2: {
-                fontSize: '1.25rem',
+                fontSize: '2rem',
                 fontWeight: 600,
               },
             },
@@ -127,7 +127,7 @@ const config = {
                 fontSize: '3.5rem',
               },
               h2: {
-                fontSize: '1.5rem',
+                fontSize: '2.5rem',
               },
             },
           ],
