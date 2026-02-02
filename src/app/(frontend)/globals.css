@@ -102,6 +102,11 @@
   margin-inline: auto;
 }
 
+a:is(:hover, :active) {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
 /* html {
   opacity: 0;
 }

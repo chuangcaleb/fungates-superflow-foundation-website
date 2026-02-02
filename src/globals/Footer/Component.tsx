@@ -1,33 +1,33 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 
-import type { Contact, Footer } from '@/payload-types'
+import type { Contact, Nav } from '@/payload-types'
 
+import ContactListItem from '@/components/ContactListItem'
 import { Icon } from '@/components/Icon'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
-import ContactListItem from '@/components/ContactListItem'
 import RichText from '@/components/RichText'
+import { NavSection } from './NavSection'
 
 export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
   const contactData: Contact = await getCachedGlobal('contact', 1)()
-
-  const navItems = footerData?.navItems || []
+  const { items: nav }: Nav = await getCachedGlobal('nav', 1)()
 
   return (
-    <footer className="mt-auto border-t border-border bg-black text-white">
-      <div className="container space-y-8 py-8 md:justify-between">
-        <Link className="flex items-center" href="/">
-          <Logo />
-        </Link>
-
+    <footer
+      className="mt-auto border-t border-border bg-background text-foreground"
+      data-theme="dark"
+    >
+      <div className="container space-y-16 py-8 md:justify-between">
+        <div className="flex flex-col gap-16 md:flex-row">
+          <Link className="mt-2" href="/">
+            <Logo />
+          </Link>
+          <NavSection navItems={nav} />
+        </div>
+        <hr className="border-muted-foreground" />
         <div className="space-y-8">
-          <nav className="flex flex-col gap-4 sm:flex-row">
-            {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
-            })}
-          </nav>
           <h3 className="sr-only">Contact</h3>
           {!!contactData.contacts?.length && contactData.bottomText && (
             <section className="space-y-4">

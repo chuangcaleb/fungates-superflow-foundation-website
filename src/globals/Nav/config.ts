@@ -39,7 +39,7 @@ const cleanupNavItems = (items: any[]): any[] => {
 const NestedNavItems: Field = {
   type: 'group',
   name: 'item',
-  label: 'Nested Link',
+  label: 'Nested Nav Item',
   fields: [
     {
       name: 'isSingleLink',
