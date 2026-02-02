@@ -11,16 +11,39 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { Nav } from '@/payload-types'
+import { cn } from '@/utilities/ui'
 
 const LinkItem = ({
   link,
+  className,
 }: {
   link: NonNullable<NonNullable<Nav['items']>[number]['item']['links']>[number]['link']
+  className?: string
 }) => {
   return (
-    <NavigationMenuItem>
-      <CMSLink {...link} className="text-foreground" />
-    </NavigationMenuItem>
+    <li>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild>
+          <CMSLink {...link} className={cn('block py-2 text-sm', className)} />
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+    </li>
+  )
+}
+
+const GroupLinks = ({
+  links,
+}: {
+  links: NonNullable<NonNullable<Nav['items']>[number]['item']['groups']>[number]['group']['links']
+}) => {
+  if (!links?.length) return null
+
+  return (
+    <ul className="grid grid-cols-2 gap-2">
+      {links.map(({ link, id }) => (
+        <LinkItem key={id} link={link} />
+      ))}
+    </ul>
   )
 }
 
@@ -29,35 +52,56 @@ const Group = ({
 }: {
   group: NonNullable<NonNullable<Nav['items']>[number]['item']['groups']>[number]['group']
 }) => {
-  return <div>NavMenu</div>
+  if (!group) return null
+
+  return (
+    <li className="flex-1 space-y-3 p-2">
+      <h4 className="text-xs font-semibold uppercase tracking-wider">{group.label}</h4>
+      <GroupLinks links={group.links} />
+    </li>
+  )
 }
 
 // Root item with optional nested items
 const RootItem = ({ item }: { item: NonNullable<Nav['items']>[number]['item'] }) => {
   if (!item) return null
 
-  if (item.variant === 'single') {
+  const { label, links, groups, variant } = item
+
+  if (variant === 'single') {
     return (
       <NavigationMenuItem>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <CMSLink {...item.link} className="text-foreground" />
-        </NavigationMenuLink>
+        <li>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <CMSLink {...item.link} />
+          </NavigationMenuLink>
+        </li>
       </NavigationMenuItem>
     )
   }
-
-  const { label, links, groups } = item
 
   return (
     <NavigationMenuItem>
       <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="w-96">
+        <ul
+          className={cn({
+            'w-80 p-2': variant === 'multi',
+            'flex w-[80ch] gap-4 p-4': variant === 'group',
+          })}
+        >
           {links?.map(({ link, id }) => (
-            <LinkItem link={link} key={id} />
+            <LinkItem link={link} key={id} className="px-2 py-3" />
           ))}
-          {groups?.map(({ group, id }) => (
-            <Group group={group} key={id} />
+          {groups?.map(({ group, id }, index) => (
+            <>
+              <Group group={group} key={id} />
+              {index !== groups.length - 1 && (
+                <li className="flex">
+                  <div className="w-px self-stretch bg-border"></div>
+                </li>
+              )}
+            </>
           ))}
         </ul>
       </NavigationMenuContent>
@@ -79,23 +123,3 @@ export const NavMenu = ({ nav }: { nav: Nav }) => {
     </NavigationMenu>
   )
 }
-
-// function ListItem({
-//   title,
-//   children,
-//   href,
-//   ...props
-// }: React.ComponentPropsWithoutRef<'li'> & { href: string }) {
-//   return (
-//     <li {...props}>
-//       <NavigationMenuLink asChild>
-//         <Link href={href}>
-//           <div className="flex flex-col gap-1 text-sm">
-//             <div className="font-medium leading-none">{title}</div>
-//             <div className="line-clamp-2 text-muted-foreground">{children}</div>
-//           </div>
-//         </Link>
-//       </NavigationMenuLink>
-//     </li>
-//   )
-// }

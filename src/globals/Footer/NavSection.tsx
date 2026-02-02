@@ -1,16 +1,6 @@
 import type { Nav } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { cn } from '@/utilities/ui'
-
-// Nested item that is a single link
-// const NavNestedLink = ({
-//   item,
-// }: {
-//   item: NonNullable<NonNullable<NonNullable<Nav['items']>[number]['item']>['items']>[number]['item']
-// }) => {
-//   return <CMSLink {...item?.link} className="text-muted-foreground" />
-// }
 
 // Nested items list renderer
 const NavLinkList = ({
@@ -24,7 +14,7 @@ const NavLinkList = ({
     <ul className="space-y-4">
       {links.map(({ link, id: nestedId }) => (
         <li key={nestedId} className="min-w-40">
-          <CMSLink {...link} className="text-muted-foreground" />
+          <CMSLink {...link} className="text-sm text-muted-foreground" />
         </li>
       ))}
     </ul>
@@ -57,7 +47,7 @@ const NavRootItem = ({ item }: { item: NonNullable<Nav['items']>[number]['item']
       <div className="flex flex-col gap-8 lg:flex-row">
         {item.groups?.map(({ group, id }) => (
           <section className="space-y-4" key={id}>
-            <h4 className="font-semibold">{group.label}</h4>
+            <h4 className="mt-2 text-xs font-semibold uppercase tracking-wider">{group.label}</h4>
             <NavLinkList key={id} links={group.links} />
           </section>
         ))}
