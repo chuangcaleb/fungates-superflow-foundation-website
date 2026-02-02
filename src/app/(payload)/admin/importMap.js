@@ -24,7 +24,8 @@ import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from 
 import { FolderTypeField as FolderTypeField_3817bf644402e67bfe6577f60ef982de } from '@payloadcms/ui'
 import { RowLabel as RowLabel_17c6ef4bfe47bfa29d923fb5718170b7 } from '@/globals/Header/RowLabel'
 import { RowLabel as RowLabel_e5f2ea2a3ff3620de63526e885e3b034 } from '@/globals/Footer/RowLabel'
-import { NestedRowLabel as NestedRowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
+import { MultiRowLabel as MultiRowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
+import { GroupRowLabel as GroupRowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
 import { RowLabel as RowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
 import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
@@ -56,7 +57,8 @@ export const importMap = {
   "@payloadcms/ui#FolderTypeField": FolderTypeField_3817bf644402e67bfe6577f60ef982de,
   "@/globals/Header/RowLabel#RowLabel": RowLabel_17c6ef4bfe47bfa29d923fb5718170b7,
   "@/globals/Footer/RowLabel#RowLabel": RowLabel_e5f2ea2a3ff3620de63526e885e3b034,
-  "@/globals/Nav/RowLabel#NestedRowLabel": NestedRowLabel_54eaa63372e00750616842d6ed3f5335,
+  "@/globals/Nav/RowLabel#MultiRowLabel": MultiRowLabel_54eaa63372e00750616842d6ed3f5335,
+  "@/globals/Nav/RowLabel#GroupRowLabel": GroupRowLabel_54eaa63372e00750616842d6ed3f5335,
   "@/globals/Nav/RowLabel#RowLabel": RowLabel_54eaa63372e00750616842d6ed3f5335,
   "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e,
   "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a

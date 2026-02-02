@@ -6,69 +6,86 @@ import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
 import { link } from '@/fields/link'
 import { revalidateNav } from './hooks/revalidateNav'
 
-const isSingleLink: Condition<any, any> = (_data, siblingData) => Boolean(siblingData?.isSingleLink)
-const isNotSingleLink: Condition<any, any> = (_data, siblingData) =>
-  !Boolean(siblingData?.isSingleLink)
+const variants = ['single', 'multi', 'group'] as const
+type Variant = (typeof variants)[number]
 
-const cleanupNavItems = (items: any[]): any[] => {
-  return (
-    items?.map((item: any) => {
-      const cleanupItem = (obj: any) => {
-        if (!obj?.isSingleLink) {
-          delete obj.link
-        } else {
-          delete obj.label
-          delete obj.items
-          delete obj.links
+const variantCondition: (variant: Variant | 'not--single') => Condition =
+  (variant) => (_data, siblingData) => {
+    if (variant === 'not--single') return siblingData.variant !== 'single'
+    return siblingData.variant === variant
+  }
+
+// thanks ai
+const cleanupNavItems = (items: any[] = []): any[] => {
+  return items.map((row) => {
+    const item = row.item
+
+    if (!item) return row
+
+    switch (item.variant) {
+      case 'single': {
+        // single → only `link` is valid
+        delete item.label
+        delete item.links
+        delete item.groups
+        break
+      }
+
+      case 'multi': {
+        // multi → label + links
+        delete item.link
+        delete item.groups
+        break
+      }
+
+      case 'group': {
+        // group → label + groups
+        delete item.link
+        delete item.links
+
+        if (Array.isArray(item.groups)) {
+          item.groups = item.groups.map((g: any) => {
+            if (!g?.item) return g
+
+            // group items: label + links
+            delete g.item.link
+            delete g.item.items
+            delete g.item.groups
+
+            return g
+          })
         }
-        return obj
-      }
 
-      cleanupItem(item.item)
-      if (item.item?.items) {
-        item.item.items = item.item.items.map((n: any) => {
-          cleanupItem(n.item)
-          return n
-        })
+        break
       }
-      return item
-    }) ?? []
-  )
+    }
+
+    return row
+  })
 }
 
-const NestedNavItems: Field = {
+const NavGroupItems: Field = {
   type: 'group',
-  name: 'item',
-  label: 'Nested Nav Item',
+  name: 'group',
   fields: [
     {
-      name: 'isSingleLink',
-      type: 'checkbox',
-      defaultValue: false,
-    },
-    link({
-      appearances: false,
-      overrides: {
-        admin: { condition: isSingleLink },
-      },
-    }),
-    {
       name: 'label',
+      label: 'Label (Group)',
       type: 'text',
       required: true,
-      label: 'Group Label',
-      admin: { condition: isNotSingleLink },
     },
     {
       name: 'links',
       type: 'array',
       fields: [link({ appearances: false })],
       admin: {
-        condition: isNotSingleLink,
-        components: { RowLabel: '@/globals/Nav/RowLabel#NestedRowLabel' },
+        components: { RowLabel: '@/globals/Nav/RowLabel#MultiRowLabel' },
       },
+      minRows: 1,
     },
   ],
+  label: 'Group',
+  required: true,
 }
 
 export const Nav: GlobalConfig = {
@@ -83,7 +100,6 @@ export const Nav: GlobalConfig = {
   fields: [
     {
       name: 'items',
-      label: 'Root Nav Items',
       type: 'array',
       fields: [
         {
@@ -92,40 +108,74 @@ export const Nav: GlobalConfig = {
           type: 'group',
           fields: [
             {
-              name: 'isSingleLink',
-              type: 'checkbox',
-              defaultValue: false,
+              type: 'row',
+              fields: [
+                {
+                  name: 'variant',
+                  type: 'select',
+                  defaultValue: 'single',
+                  options: [
+                    { label: 'Single', value: 'single' },
+                    { label: 'Multi', value: 'multi' },
+                    { label: 'Group', value: 'group' },
+                  ],
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                  label: 'Label (Root)',
+                  admin: {
+                    condition: variantCondition('not--single'),
+                    width: '50%',
+                  },
+                },
+              ],
             },
             link({
               appearances: false,
               overrides: {
-                admin: { condition: isSingleLink },
+                admin: { condition: variantCondition('single') },
               },
             }),
             {
-              name: 'label',
-              type: 'text',
+              name: 'links',
+              type: 'array',
+              fields: [link({ appearances: false })],
+              admin: {
+                condition: variantCondition('multi'),
+                components: { RowLabel: '@/globals/Nav/RowLabel#MultiRowLabel' },
+                initCollapsed: true,
+              },
+              minRows: 1,
               required: true,
-              label: 'Group Label',
-              admin: { condition: isNotSingleLink },
             },
             {
-              name: 'items',
-              label: 'Nested Nav Items',
+              name: 'groups',
               type: 'array',
-              fields: [NestedNavItems],
+              fields: [NavGroupItems],
               admin: {
-                condition: isNotSingleLink,
-                components: { RowLabel: '@/globals/Nav/RowLabel#RowLabel' },
+                condition: variantCondition('group'),
+                components: { RowLabel: '@/globals/Nav/RowLabel#GroupRowLabel' },
+                initCollapsed: true,
               },
+              minRows: 1,
+              required: true,
             },
           ],
+          required: true,
         },
       ],
       maxRows: 6,
+      minRows: 1,
       admin: {
         components: { RowLabel: '@/globals/Nav/RowLabel#RowLabel' },
         initCollapsed: false,
+      },
+      labels: {
+        plural: 'Root Nav Items',
+        singular: 'Root Nav Item',
       },
     },
   ],
@@ -134,4 +184,8 @@ export const Nav: GlobalConfig = {
     afterRead: [({ doc }) => ({ ...doc, items: cleanupNavItems(doc.items) })],
     afterChange: [revalidateNav],
   },
+  // versions: {
+  //   max: 10,
+  //   drafts: { schedulePublish: true },
+  // },
 }

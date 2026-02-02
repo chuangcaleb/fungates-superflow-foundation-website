@@ -21,9 +21,11 @@ export async function Footer() {
     >
       <div className="container space-y-16 py-8 md:justify-between">
         <div className="flex flex-col gap-16 md:flex-row">
-          <Link className="mt-2" href="/">
-            <Logo />
-          </Link>
+          <div>
+            <Link className="mt-2" href="/">
+              <Logo />
+            </Link>
+          </div>
           <NavSection navItems={nav} />
         </div>
         <hr className="border-muted-foreground" />
@@ -38,7 +40,7 @@ export async function Footer() {
               </ul>
               {contactData.bottomText && (
                 <RichText
-                  className="text-muted-foreground"
+                  className="text-sm text-muted-foreground"
                   data={contactData.bottomText}
                   enableGutter={false}
                 />

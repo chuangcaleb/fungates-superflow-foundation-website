@@ -12,45 +12,19 @@ import { cn } from '@/utilities/ui'
 //   return <CMSLink {...item?.link} className="text-muted-foreground" />
 // }
 
-// Nested item with sub-label and multiple links
-const NavLinkGroup = ({
-  item,
-}: {
-  item: NonNullable<NonNullable<NonNullable<Nav['items']>[number]['item']>['items']>[number]['item']
-}) => {
-  if (!item) return null
-  return (
-    <div className="space-y-4">
-      <h4>{item.label}</h4>
-      <ul className="ml-1 space-y-4 border-l border-muted-foreground pl-4">
-        {item.links?.map(({ link, id: linkId }) => (
-          <li key={linkId}>
-            <CMSLink {...link} className="text-muted-foreground" />
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
 // Nested items list renderer
-const NavNestedList = ({
-  items,
+const NavLinkList = ({
+  links,
 }: {
-  items: NonNullable<NonNullable<Nav['items']>[number]['item']>['items']
+  links: NonNullable<NonNullable<Nav['items']>[number]['item']>['links']
 }) => {
-  if (!items?.length) return null
+  if (!links?.length) return null
 
-  const isAllLinks = items.every(({ item }) => item?.isSingleLink)
   return (
-    <ul className={cn(isAllLinks ? 'space-y-4' : 'flex flex-col gap-4 lg:flex-row lg:gap-8')}>
-      {items.map(({ item: nestedItem, id: nestedId }) => (
-        <li key={nestedId} className="flex-1">
-          {nestedItem?.isSingleLink ? (
-            <CMSLink {...nestedItem?.link} className="text-muted-foreground" />
-          ) : (
-            <NavLinkGroup item={nestedItem} />
-          )}
+    <ul className="space-y-4">
+      {links.map(({ link, id: nestedId }) => (
+        <li key={nestedId} className="min-w-40">
+          <CMSLink {...link} className="text-muted-foreground" />
         </li>
       ))}
     </ul>
@@ -59,31 +33,44 @@ const NavNestedList = ({
 
 // Root item with optional nested items
 const NavRootItem = ({ item }: { item: NonNullable<Nav['items']>[number]['item'] }) => {
-  if (item?.isSingleLink) {
-    // don't render single links at root
+  if (item.variant === 'single') {
+    // don't render single links at root for Footer
     return
     // return <CMSLink {...item.link} className="text-foreground" />
   }
 
-  const childrenGroupsCount = item?.items?.filter(
-    ({ item: nestedItem }) => !nestedItem?.isSingleLink,
-  ).length
+  if (item.variant === 'multi') {
+    return (
+      <div className="flex-1 space-y-4">
+        <section className="border-b border-muted-foreground pb-2 text-xl font-semibold">
+          {item?.label}
+        </section>
+        <NavLinkList links={item?.links} />
+      </div>
+    )
+  }
 
+  // is variant === 'group'
   return (
-    <div className="flex-1 space-y-4" style={{ flexGrow: childrenGroupsCount || 1 }}>
+    <section className="flex-1 space-y-4 lg:px-2" style={{ flexGrow: item.groups?.length || 1 }}>
       <h3 className="border-b border-muted-foreground pb-2 text-xl font-semibold">{item?.label}</h3>
-      <NavNestedList items={item?.items} />
-    </div>
+      <div className="flex flex-col gap-8 lg:flex-row">
+        {item.groups?.map(({ group, id }) => (
+          <section className="space-y-4" key={id}>
+            <h4 className="font-semibold">{group.label}</h4>
+            <NavLinkList key={id} links={group.links} />
+          </section>
+        ))}
+      </div>
+    </section>
   )
 }
 
 export const NavSection = ({ navItems }: { navItems: Nav['items'] }) => {
-  const filteredNavItems = navItems?.filter(({ item }) => !item?.isSingleLink)
-  if (!filteredNavItems?.length) return null
-
+  if (!navItems?.length) return null
   return (
     <nav className="flex flex-col gap-12 lg:flex-row">
-      {filteredNavItems.map(({ item: rootItem, id: rootId }) => (
+      {navItems.map(({ item: rootItem, id: rootId }) => (
         <NavRootItem key={rootId} item={rootItem} />
       ))}
     </nav>

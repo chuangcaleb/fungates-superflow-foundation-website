@@ -1791,8 +1791,9 @@ export interface Nav {
   id: number;
   items?:
     | {
-        item?: {
-          isSingleLink?: boolean | null;
+        item: {
+          variant?: ('single' | 'multi' | 'group') | null;
+          label?: string | null;
           link?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
@@ -1808,27 +1809,30 @@ export interface Nav {
             url?: string | null;
             label: string;
           };
-          label?: string | null;
-          items?:
+          links?:
             | {
-                item?: {
-                  isSingleLink?: boolean | null;
-                  link?: {
-                    type?: ('reference' | 'custom') | null;
-                    newTab?: boolean | null;
-                    reference?:
-                      | ({
-                          relationTo: 'pages';
-                          value: number | Page;
-                        } | null)
-                      | ({
-                          relationTo: 'posts';
-                          value: number | Post;
-                        } | null);
-                    url?: string | null;
-                    label: string;
-                  };
-                  label?: string | null;
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: number | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: number | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          groups?:
+            | {
+                group: {
+                  label: string;
                   links?:
                     | {
                         link: {
@@ -1958,7 +1962,8 @@ export interface NavSelect<T extends boolean = true> {
         item?:
           | T
           | {
-              isSingleLink?: T;
+              variant?: T;
+              label?: T;
               link?:
                 | T
                 | {
@@ -1968,23 +1973,26 @@ export interface NavSelect<T extends boolean = true> {
                     url?: T;
                     label?: T;
                   };
-              label?: T;
-              items?:
+              links?:
                 | T
                 | {
-                    item?:
+                    link?:
                       | T
                       | {
-                          isSingleLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                newTab?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                              };
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+              groups?:
+                | T
+                | {
+                    group?:
+                      | T
+                      | {
                           label?: T;
                           links?:
                             | T

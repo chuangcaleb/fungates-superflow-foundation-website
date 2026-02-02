@@ -6,9 +6,23 @@ export const RowLabel: React.FC<RowLabelProps> = () => {
   const {
     data: { item },
   } = useRowLabel<NonNullable<Nav['items']>[number]>()
-  return item?.isSingleLink ? item?.link?.label : item?.label
+  return item?.label ?? item.link?.label
 }
-export const NestedRowLabel: React.FC<RowLabelProps> = () => {
-  const { data } = useRowLabel<NonNullable<NonNullable<Nav['items']>[number]['item']>>()
-  return data?.link?.label
+export const MultiRowLabel: React.FC<RowLabelProps> = () => {
+  const { data } =
+    useRowLabel<
+      NonNullable<NonNullable<NonNullable<Nav['items']>[number]['item']>['links']>[number]
+    >()
+
+  return data?.link.label
+}
+
+export const GroupRowLabel: React.FC<RowLabelProps> = () => {
+  const {
+    data: { group },
+  } =
+    useRowLabel<
+      NonNullable<NonNullable<NonNullable<Nav['items']>[number]['item']>['groups']>[number]
+    >()
+  return group?.label
 }

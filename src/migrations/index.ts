@@ -13,6 +13,9 @@ import * as migration_20260201_073519_contact_address_title from './20260201_073
 import * as migration_20260201_080321_contact_location_title from './20260201_080321_contact_location_title';
 import * as migration_20260201_082128_remove_contact_link from './20260201_082128_remove_contact_link';
 import * as migration_20260201_151920_nav_config from './20260201_151920_nav_config';
+import * as migration_20260202_092806_remove_nav from './20260202_092806_remove_nav';
+import * as migration_20260202_092814_nav_variants from './20260202_092814_nav_variants';
+import * as migration_20260202_133855_nav_rename_item_group from './20260202_133855_nav_rename_item_group';
 
 export const migrations = [
   {
@@ -88,6 +91,21 @@ export const migrations = [
   {
     up: migration_20260201_151920_nav_config.up,
     down: migration_20260201_151920_nav_config.down,
-    name: '20260201_151920_nav_config'
+    name: '20260201_151920_nav_config',
+  },
+  {
+    up: migration_20260202_092806_remove_nav.up,
+    down: migration_20260202_092806_remove_nav.down,
+    name: '20260202_092806_remove_nav',
+  },
+  {
+    up: migration_20260202_092814_nav_variants.up,
+    down: migration_20260202_092814_nav_variants.down,
+    name: '20260202_092814_nav_variants',
+  },
+  {
+    up: migration_20260202_133855_nav_rename_item_group.up,
+    down: migration_20260202_133855_nav_rename_item_group.down,
+    name: '20260202_133855_nav_rename_item_group'
   },
 ];
