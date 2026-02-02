@@ -71,11 +71,9 @@ const RootItem = ({ item }: { item: NonNullable<Nav['items']>[number]['item'] })
   if (variant === 'single') {
     return (
       <NavigationMenuItem>
-        <li>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <CMSLink {...item.link} />
-          </NavigationMenuLink>
-        </li>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <CMSLink {...item.link} />
+        </NavigationMenuLink>
       </NavigationMenuItem>
     )
   }
