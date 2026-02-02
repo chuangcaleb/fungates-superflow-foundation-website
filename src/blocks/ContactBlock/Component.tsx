@@ -42,7 +42,7 @@ export const ContactBlock: React.FC<{}> = async ({}) => {
       </ul>
       {contactData.bottomText && (
         <RichText
-          className="text-muted-foreground"
+          className="text-sm text-muted-foreground"
           data={contactData.bottomText}
           enableGutter={false}
         />
