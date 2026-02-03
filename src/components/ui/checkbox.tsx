@@ -2,7 +2,7 @@
 
 import { cn } from '@/utilities/ui'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
-import { Check } from 'lucide-react'
+import { CheckIcon } from '@phosphor-icons/react'
 import * as React from 'react'
 
 const Checkbox: React.FC<
@@ -19,7 +19,7 @@ const Checkbox: React.FC<
     {...props}
   >
     <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      <Check className="h-4 w-4" />
+      <CheckIcon className="h-4 w-4" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 )

@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from '@/components/ui/accordion'
+import { ListIcon } from '@phosphor-icons/react'
 
 const NavSheet = ({ nav }: { nav: Nav }) => {
   const navItems = nav?.items
@@ -19,7 +20,7 @@ const NavSheet = ({ nav }: { nav: Nav }) => {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">
-          <Icon name="list-icon" weight="bold" size={20} />
+          <ListIcon size={20} weight="bold" />
         </Button>
       </SheetTrigger>
       <SheetContent className="flex flex-col overflow-y-auto">

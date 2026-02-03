@@ -2,7 +2,7 @@
 
 import { cn } from '@/utilities/ui'
 import * as SelectPrimitive from '@radix-ui/react-select'
-import { Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { Check, CaretDown, CaretUp } from '@phosphor-icons/react'
 import * as React from 'react'
 
 const Select = SelectPrimitive.Root
@@ -24,7 +24,7 @@ const SelectTrigger: React.FC<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
+      <CaretDown className="h-4 w-4 opacity-50" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 )
@@ -37,7 +37,7 @@ const SelectScrollUpButton: React.FC<
     ref={ref}
     {...props}
   >
-    <ChevronUp className="h-4 w-4" />
+    <CaretUp className="h-4 w-4" />
   </SelectPrimitive.ScrollUpButton>
 )
 
@@ -51,7 +51,7 @@ const SelectScrollDownButton: React.FC<
     ref={ref}
     {...props}
   >
-    <ChevronDown className="h-4 w-4" />
+    <CaretDown className="h-4 w-4" />
   </SelectPrimitive.ScrollDownButton>
 )
 

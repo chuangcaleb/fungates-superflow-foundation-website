@@ -3,7 +3,7 @@
 import * as React from 'react'
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { X } from 'lucide-react'
+import { XIcon } from '@phosphor-icons/react'
 
 import { cn } from '@/utilities/ui'
 
@@ -64,7 +64,7 @@ const SheetContent = React.forwardRef<
       {children}
       <SheetPrimitive.Close className="fixed right-4 top-4 rounded-xl bg-background ring-offset-background transition-opacity focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
         <div className="opacity-70 hover:opacity-100">
-          <X className="h-4 w-4" />
+          <XIcon weight="bold" className="h-4 w-4" />
         </div>
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
