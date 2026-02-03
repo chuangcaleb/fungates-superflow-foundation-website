@@ -14,7 +14,7 @@ const StaffCard = ({ staff }: { staff: Staff }) => {
         />
       ) : (
         <Image
-          src="/website-template-OG.webp"
+          src="/not-found.png"
           alt="No profile image"
           width={224}
           height={224}
