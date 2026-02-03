@@ -11,6 +11,8 @@ import { Categories } from '@/collections/Categories'
 import { Media } from '@/collections/Media'
 import { Pages } from '@/collections/Pages'
 import { Posts } from '@/collections/Posts'
+import { Staff } from '@/collections/Staff'
+import { StaffGroups } from '@/collections/StaffGroups'
 import { Users } from '@/collections/Users'
 import { Contact } from '@/globals/Contact/config'
 import { Nav } from '@/globals/Nav/config'
@@ -65,7 +67,7 @@ export default buildConfig({
         push: false,
         migrationDir: 'src/cms/migrations',
       }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Staff, StaffGroups, Users],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,

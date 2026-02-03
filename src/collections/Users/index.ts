@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import { ValidationError, type CollectionConfig } from 'payload'
 
 import { admin } from '@/cms/access/role/admin'
 import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
@@ -14,7 +14,7 @@ export const Users: CollectionConfig = {
     update: admin,
   },
   admin: {
-    defaultColumns: ['name', 'email', 'role'],
+    defaultColumns: ['name', 'email', 'role', 'image'],
     useAsTitle: 'name',
     hidden: ({ user }) => !getMinRoleLevel(user.role, 'admin'),
   },
@@ -24,6 +24,17 @@ export const Users: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'image',
+      type: 'relationship',
+      relationTo: 'media',
+      required: false,
+      label: 'Profile Image (Optional)',
+      admin: {
+        description:
+          'Profile image for login users — `Staff` entries can fallback to this image when linked. Prefer 1:1 square-ratio images.',
+      },
     },
     {
       name: 'role',
@@ -76,9 +87,21 @@ export const Users: CollectionConfig = {
         const oldRole = originalDoc?.role || 'none'
         const newRole = data?.role || oldRole
 
+        // no need to validate if there is no change in role
+        if (oldRole === newRole) return data
+
         // 0. check that acting user is not target user
-        if (originalDoc.id === actingUser.id)
-          throw new Error('You are not allowed to change your own role')
+        if (originalDoc.id === actingUser.id) {
+          throw new ValidationError({
+            errors: [
+              {
+                path: 'role',
+                message: 'You are not allowed to change your own role.',
+              },
+            ],
+            req,
+          })
+        }
 
         // --- 1. superadmin can do anything ---
         if (actingUser.role === 'superadmin') {
@@ -91,14 +114,30 @@ export const Users: CollectionConfig = {
           const targetIsAdminOrSuperadmin = getMinRoleLevel(oldRole, 'admin')
 
           if (targetIsAdminOrSuperadmin) {
-            throw new Error('Admins cannot change the roles of other admins or superadmins')
+            throw new ValidationError({
+              errors: [
+                {
+                  path: 'role',
+                  message: 'Admins cannot change the roles of other admins or superadmins.',
+                },
+              ],
+              req,
+            })
           }
 
           // Allowed roles to assign
           const allowedRoles: string[] = ['editor', 'author', 'none']
 
           if (!allowedRoles.includes(newRole)) {
-            throw new Error(`Admins can only assign roles: editor, author, none`)
+            throw new ValidationError({
+              errors: [
+                {
+                  path: 'role',
+                  message: 'Admins can only assign roles: editor, author, none.',
+                },
+              ],
+              req,
+            })
           }
 
           return data
@@ -106,7 +145,15 @@ export const Users: CollectionConfig = {
 
         // --- 3. any other roles cannot change roles ---
         // But should be handled by UPDATE perms
-        throw new Error('You do not have permission to change roles')
+        throw new ValidationError({
+          errors: [
+            {
+              path: 'role',
+              message: 'You do not have permission to change roles',
+            },
+          ],
+          req,
+        })
       },
     ],
   },

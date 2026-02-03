@@ -71,6 +71,8 @@ export interface Config {
     posts: Post;
     media: Media;
     categories: Category;
+    staff: Staff;
+    'staff-groups': StaffGroup;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -93,6 +95,8 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    staff: StaffSelect<false> | StaffSelect<true>;
+    'staff-groups': StaffGroupsSelect<false> | StaffGroupsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -201,7 +205,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ContactBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ContactBlock | TeamBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -420,6 +424,10 @@ export interface Category {
 export interface User {
   id: number;
   name: string;
+  /**
+   * Profile image for login users — `Staff` entries can fallback to this image when linked. Prefer 1:1 square-ratio images.
+   */
+  image?: (number | null) | Media;
   /**
    * (1) You cannot change your own role. (2) Admins can only manage the "Editor", "Author" and "None" roles.
    */
@@ -797,6 +805,69 @@ export interface ContactBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock".
+ */
+export interface TeamBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'team';
+}
+/**
+ * Staff members to display on the "Teams" page. Not used for admin/user log-in. Must belong to a Staff Group in order to be displayed.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff".
+ */
+export interface Staff {
+  id: number;
+  name: string;
+  title: string;
+  /**
+   * Select the Staff Group this staff belongs to. Each staff MUST belong to exactly one group.
+   */
+  group: number | StaffGroup;
+  message?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * If empty and `user` is linked, the User image will be used. Prefer 1:1 square-ratio images.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Optional: link this staff entry to a `users` account (to re-use the profile image). Leave empty for staff without a user login account.
+   */
+  user?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff-groups".
+ */
+export interface StaffGroup {
+  id: number;
+  label: string;
+  /**
+   * When unchecked, the group will be hidden from the public Team page
+   */
+  showOnTeam?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1002,6 +1073,14 @@ export interface PayloadLockedDocument {
         value: number | Category;
       } | null)
     | ({
+        relationTo: 'staff';
+        value: number | Staff;
+      } | null)
+    | ({
+        relationTo: 'staff-groups';
+        value: number | StaffGroup;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
       } | null)
@@ -1105,6 +1184,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         contact?: T | ContactBlockSelect<T>;
+        team?: T | TeamBlockSelect<T>;
       };
   meta?:
     | T
@@ -1211,6 +1291,14 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "ContactBlock_select".
  */
 export interface ContactBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock_select".
+ */
+export interface TeamBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -1361,10 +1449,35 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff_select".
+ */
+export interface StaffSelect<T extends boolean = true> {
+  name?: T;
+  title?: T;
+  group?: T;
+  message?: T;
+  image?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff-groups_select".
+ */
+export interface StaffGroupsSelect<T extends boolean = true> {
+  label?: T;
+  showOnTeam?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  image?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;

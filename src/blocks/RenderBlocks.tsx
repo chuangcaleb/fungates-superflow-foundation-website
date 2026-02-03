@@ -8,6 +8,7 @@ import { ContactBlock } from '@/blocks/ContactBlock/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import TeamBlock from './TeamBlock/Component'
 
 const blockComponents: Record<Page['layout'][number]['blockType'], FC<any>> = {
   archive: ArchiveBlock,
@@ -16,6 +17,7 @@ const blockComponents: Record<Page['layout'][number]['blockType'], FC<any>> = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   contact: ContactBlock,
+  team: TeamBlock,
 }
 
 export const RenderBlocks: React.FC<{

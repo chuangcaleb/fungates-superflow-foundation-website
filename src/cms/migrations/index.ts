@@ -18,6 +18,9 @@ import * as migration_20260202_092814_nav_variants from './20260202_092814_nav_v
 import * as migration_20260202_133855_nav_rename_item_group from './20260202_133855_nav_rename_item_group';
 import * as migration_20260203_013233_remove_header_and_footer_globals from './20260203_013233_remove_header_and_footer_globals';
 import * as migration_20260203_035021_nav_only_in_footer from './20260203_035021_nav_only_in_footer';
+import * as migration_20260203_050710_create_staff_and_groups from './20260203_050710_create_staff_and_groups';
+import * as migration_20260203_053748_add_pages_teams_block from './20260203_053748_add_pages_teams_block';
+import * as migration_20260203_062155_staff_unique_user from './20260203_062155_staff_unique_user';
 
 export const migrations = [
   {
@@ -118,6 +121,21 @@ export const migrations = [
   {
     up: migration_20260203_035021_nav_only_in_footer.up,
     down: migration_20260203_035021_nav_only_in_footer.down,
-    name: '20260203_035021_nav_only_in_footer'
+    name: '20260203_035021_nav_only_in_footer',
+  },
+  {
+    up: migration_20260203_050710_create_staff_and_groups.up,
+    down: migration_20260203_050710_create_staff_and_groups.down,
+    name: '20260203_050710_create_staff_and_groups',
+  },
+  {
+    up: migration_20260203_053748_add_pages_teams_block.up,
+    down: migration_20260203_053748_add_pages_teams_block.down,
+    name: '20260203_053748_add_pages_teams_block',
+  },
+  {
+    up: migration_20260203_062155_staff_unique_user.up,
+    down: migration_20260203_062155_staff_unique_user.down,
+    name: '20260203_062155_staff_unique_user'
   },
 ];
