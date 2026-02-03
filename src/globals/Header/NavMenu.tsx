@@ -21,13 +21,11 @@ const LinkItem = ({
   className?: string
 }) => {
   return (
-    <li>
-      <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <CMSLink {...link} className={cn('block py-2 text-sm', className)} />
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-    </li>
+    <NavigationMenuItem>
+      <NavigationMenuLink asChild>
+        <CMSLink {...link} className={cn('block py-2 text-sm', className)} />
+      </NavigationMenuLink>
+    </NavigationMenuItem>
   )
 }
 
