@@ -4,17 +4,16 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-import type { Header, Nav } from '@/payload-types'
+import type { Nav } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
 import { NavMenu } from './NavMenu'
 import NavSheet from './NavSheet'
 interface HeaderClientProps {
-  header: Header
   nav: Nav
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ header, nav }) => {
+export const HeaderClient: React.FC<HeaderClientProps> = ({ nav }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
