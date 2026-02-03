@@ -1,4 +1,5 @@
 import RichText from '@/components/RichText'
+import { isEmptyRichText } from '@/components/RichText/utils'
 import { cn } from '@/utilities/ui'
 import React from 'react'
 
@@ -20,27 +21,19 @@ const colsSpanClasses = {
 type TColumn = NonNullable<ContentBlockProps['columns']>[number]
 const Column = ({ col }: { col: TColumn }) => {
   const { enableLink, link, richText, size, media, variant } = col
-  const richTextContent = richText?.root.children
-  const isEmptyRichText =
-    !!richTextContent &&
-    richTextContent.length === 1 &&
-    'children' in richTextContent[0] &&
-    Array.isArray(richTextContent[0].children) &&
-    richTextContent[0].children.length === 0
-
+  const hasMedia = !!media && isObject(media)
   const columnClassName = cn(`space-y-6 col-span-4 lg:col-span-${colsSpanClasses[size!]} h-full`, {
     'md:col-span-2': size !== 'full',
     'md:col-span-4': size === 'oneHalfWide',
   })
-
-  const hasMedia = !!media && isObject(media)
+  const isEmpty = isEmptyRichText(richText)
 
   if (variant === 'card') {
     return (
       <div className={columnClassName}>
         <Card className={cn('flex h-full flex-col justify-between gap-8', !hasMedia && 'p-6')}>
           <div className={cn('space-y-4', hasMedia && 'p-6 pb-0')}>
-            {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}
+            {richText && !isEmpty && <RichText data={richText} enableGutter={false} />}
             {enableLink && <CMSLink {...link} />}
           </div>
           {hasMedia && <Media imgClassName="rounded-b-xl" resource={media} />}
@@ -56,8 +49,8 @@ const Column = ({ col }: { col: TColumn }) => {
         'place-content-center': variant === 'align-center',
       })}
     >
-      {richText && !isEmptyRichText && <RichText data={richText} enableGutter={false} />}
-      {isEmptyRichText && hasMedia && <Media imgClassName="rounded-xl" resource={media} />}
+      {richText && !isEmpty && <RichText data={richText} enableGutter={false} />}
+      {isEmpty && hasMedia && <Media imgClassName="rounded-xl" resource={media} />}
       {enableLink && <CMSLink {...link} />}
     </div>
   )

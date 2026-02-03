@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 import React from 'react'
 
 import type { Staff, StaffGroup } from '@/payload-types'
-import StaffCard from './StaffCard'
+import { StaffCard } from './StaffCard'
 
 export const TeamBlock: React.FC<{}> = async ({}) => {
   const payload = await getPayload({ config })
@@ -36,12 +36,12 @@ export const TeamBlock: React.FC<{}> = async ({}) => {
   )
 
   return (
-    <div className="container prose space-y-12">
+    <div className="container prose space-y-20">
       <h2 className="sr-only">Our Team</h2>
       {groupsWithStaff.map((group) => (
         <div key={group.id} className="space-y-8">
           <h3 className="text-2xl font-semibold">{group.label}</h3>
-          <div className="xs:grid-cols-2 grid justify-center gap-16 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-10 md:gap-12 lg:grid-cols-4 lg:gap-14 xl:grid-cols-5 xl:gap-16">
             {group.staff.length > 0 ? (
               group.staff.map((staff: Staff) => <StaffCard key={staff.id} staff={staff} />)
             ) : (
