@@ -81,8 +81,8 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-asap-mono)'],
+        sans: ['var(--font-asap-sans)'],
       },
       keyframes: {
         'accordion-down': {
