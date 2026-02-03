@@ -1,8 +1,8 @@
 import type { Condition, Field, GlobalConfig } from 'payload'
 
-import { anyone } from '@/access/anyone'
-import { editor } from '@/access/role/editor'
-import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
+import { anyone } from '@/cms/access/anyone'
+import { editor } from '@/cms/access/role/editor'
+import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
 import { link } from '@/fields/link'
 import { revalidateNav } from './hooks/revalidateNav'
 

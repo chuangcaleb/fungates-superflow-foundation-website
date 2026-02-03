@@ -1,8 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
-import { admin } from '@/access/role/admin'
-import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
-import { authenticated } from '../../access/authenticated'
+import { admin } from '@/cms/access/role/admin'
+import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
+import { authenticated } from '../../cms/access/authenticated'
 
 export const Users: CollectionConfig = {
   slug: 'users',

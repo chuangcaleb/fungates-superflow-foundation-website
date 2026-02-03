@@ -7,13 +7,13 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { populatePublishedAt } from '../../hooks/populatePublishedAt'
+import { populatePublishedAt } from '../../cms/access/hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { editor } from '@/access/role/editor'
-import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
+import { authenticatedOrPublished } from '@/cms/access/authenticatedOrPublished'
+import { editor } from '@/cms/access/role/editor'
+import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
 import { ContactBlock } from '@/blocks/ContactBlock/config'
 import {
   MetaDescriptionField,

@@ -8,9 +8,9 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { author } from '@/access/role/author'
-import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
-import { anyone } from '../access/anyone'
+import { author } from '@/cms/access/role/author'
+import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
+import { anyone } from '../cms/access/anyone'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

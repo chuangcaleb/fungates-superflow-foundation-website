@@ -1,9 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
-import { author } from '@/access/role/author'
-import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
+import { author } from '@/cms/access/role/author'
+import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
 import { slugField } from 'payload'
-import { anyone } from '../access/anyone'
+import { anyone } from '../cms/access/anyone'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',

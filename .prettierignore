@@ -13,5 +13,5 @@
 tsconfig.json
 
 pnpm-lock.yaml
-src/migrations/**
+src/cms/migrations/**
 src/app/(payload)/admin/importMap.js

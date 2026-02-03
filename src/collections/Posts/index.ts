@@ -16,9 +16,9 @@ import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { author } from '@/access/role/author'
-import { getMinRoleLevel } from '@/access/role/getMinRoleLevel'
+import { authenticatedOrPublished } from '@/cms/access/authenticatedOrPublished'
+import { author } from '@/cms/access/role/author'
+import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
 import {
   MetaDescriptionField,
   MetaImageField,
