@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Nav } from '@/payload-types'
 import { cn } from '@/utilities/ui'
+import { Fragment } from 'react'
 
 const LinkItem = ({
   link,
@@ -90,14 +91,14 @@ const RootItem = ({ item }: { item: NonNullable<Nav['items']>[number]['item'] })
             <LinkItem link={link} key={id} className="px-2 py-3" />
           ))}
           {groups?.map(({ group, id }, index) => (
-            <>
+            <Fragment key={id}>
               <Group group={group} key={id} />
               {index !== groups.length - 1 && (
                 <li className="flex">
                   <div className="w-px self-stretch bg-border"></div>
                 </li>
               )}
-            </>
+            </Fragment>
           ))}
         </ul>
       </NavigationMenuContent>

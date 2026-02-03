@@ -13,11 +13,9 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Contact } from './globals/Contact/config'
-import { Footer } from './globals/Footer/config'
-import { Header } from './globals/Header/config'
+import { Nav } from './globals/Nav/config'
 import { plugins } from './plugins'
 import { getServerSideURL } from './utilities/getURL'
-import { Nav } from './globals/Nav/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -77,7 +75,7 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
-  globals: [Header, Contact, Footer, Nav],
+  globals: [Contact, Nav],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
