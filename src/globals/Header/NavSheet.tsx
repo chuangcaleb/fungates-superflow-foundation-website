@@ -41,11 +41,13 @@ const NavSheet = ({ nav }: { nav: Nav }) => {
                   {/* Multi variant: flat list of links */}
                   {item.variant === 'multi' && item.links && (
                     <ul className="space-y-4 pb-2 pt-4">
-                      {item.links.map(({ link, id: linkId }) => (
-                        <li key={linkId}>
-                          <CMSLink {...link} className="block py-1" />
-                        </li>
-                      ))}
+                      {item.links
+                        .filter(({ link }) => !link.onlyInFooter)
+                        .map(({ link, id: linkId }) => (
+                          <li key={linkId}>
+                            <CMSLink {...link} className="block py-1" />
+                          </li>
+                        ))}
                     </ul>
                   )}
 

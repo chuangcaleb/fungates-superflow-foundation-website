@@ -56,12 +56,14 @@ export default buildConfig({
         pool: {
           connectionString: process.env.POSTGRES_URL,
         },
+        migrationDir: 'src/cms/migrations',
       })
     : postgresAdapter({
         pool: {
           connectionString: process.env.DATABASE_URL,
         },
         push: false,
+        migrationDir: 'src/cms/migrations',
       }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),

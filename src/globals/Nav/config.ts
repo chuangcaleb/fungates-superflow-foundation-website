@@ -142,7 +142,12 @@ export const Nav: GlobalConfig = {
             {
               name: 'links',
               type: 'array',
-              fields: [link({ appearances: false })],
+              fields: [
+                link({
+                  appearances: false,
+                  extraFields: [{ name: 'onlyInFooter', type: 'checkbox', defaultValue: false }],
+                }),
+              ],
               admin: {
                 condition: variantCondition('multi'),
                 components: { RowLabel: '@/globals/Nav/RowLabel#MultiRowLabel' },

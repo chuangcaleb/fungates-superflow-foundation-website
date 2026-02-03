@@ -1763,6 +1763,7 @@ export interface Nav {
                       } | null);
                   url?: string | null;
                   label: string;
+                  onlyInFooter?: boolean | null;
                 };
                 id?: string | null;
               }[]
@@ -1876,6 +1877,7 @@ export interface NavSelect<T extends boolean = true> {
                           reference?: T;
                           url?: T;
                           label?: T;
+                          onlyInFooter?: T;
                         };
                     id?: T;
                   };

@@ -87,9 +87,11 @@ const RootItem = ({ item }: { item: NonNullable<Nav['items']>[number]['item'] })
             'flex w-[80ch] gap-4 p-4': variant === 'group',
           })}
         >
-          {links?.map(({ link, id }) => (
-            <LinkItem link={link} key={id} className="px-2 py-3" />
-          ))}
+          {links
+            ?.filter(({ link }) => !link.onlyInFooter)
+            .map(({ link, id }) => (
+              <LinkItem link={link} key={id} className="px-2 py-3" />
+            ))}
           {groups?.map(({ group, id }, index) => (
             <Fragment key={id}>
               <Group group={group} key={id} />

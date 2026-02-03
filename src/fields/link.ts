@@ -18,10 +18,16 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
+  extraFields?: Field[]
   overrides?: Partial<GroupField>
 }) => Field
 
-export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+export const link: LinkType = ({
+  appearances,
+  disableLabel = false,
+  extraFields = [],
+  overrides = {},
+} = {}) => {
   const linkResult: GroupField = {
     name: 'link',
     type: 'group',
@@ -134,6 +140,8 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       options: appearanceOptionsToUse,
     })
   }
+
+  linkResult.fields = [...linkResult.fields, ...extraFields]
 
   return deepMerge(linkResult, overrides)
 }

@@ -17,6 +17,7 @@ import * as migration_20260202_092806_remove_nav from './20260202_092806_remove_
 import * as migration_20260202_092814_nav_variants from './20260202_092814_nav_variants';
 import * as migration_20260202_133855_nav_rename_item_group from './20260202_133855_nav_rename_item_group';
 import * as migration_20260203_013233_remove_header_and_footer_globals from './20260203_013233_remove_header_and_footer_globals';
+import * as migration_20260203_035021_nav_only_in_footer from './20260203_035021_nav_only_in_footer';
 
 export const migrations = [
   {
@@ -112,6 +113,11 @@ export const migrations = [
   {
     up: migration_20260203_013233_remove_header_and_footer_globals.up,
     down: migration_20260203_013233_remove_header_and_footer_globals.down,
-    name: '20260203_013233_remove_header_and_footer_globals'
+    name: '20260203_013233_remove_header_and_footer_globals',
+  },
+  {
+    up: migration_20260203_035021_nav_only_in_footer.up,
+    down: migration_20260203_035021_nav_only_in_footer.down,
+    name: '20260203_035021_nav_only_in_footer'
   },
 ];
