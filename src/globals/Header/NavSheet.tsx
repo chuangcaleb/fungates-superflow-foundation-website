@@ -1,16 +1,15 @@
 'use client'
 
-import { Icon } from '@/components/Icon'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Nav } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Nav } from '@/payload-types'
 import { ListIcon } from '@phosphor-icons/react'
 
 const NavSheet = ({ nav }: { nav: Nav }) => {

@@ -5,7 +5,7 @@ import React from 'react'
 import type { Staff, StaffGroup } from '@/payload-types'
 import { StaffCard } from './StaffCard'
 
-export const TeamBlock: React.FC<{}> = async ({}) => {
+export const TeamBlock: React.FC<{}> = async () => {
   const payload = await getPayload({ config })
 
   const { docs: staffGroups } = await payload.find({

@@ -1,5 +1,4 @@
 import ContactListItem from '@/components/ContactListItem'
-import { Icon } from '@/components/Icon'
 import { CMSLink } from '@/components/Link'
 import ListItemWithIcon from '@/components/ListItemWithIcon'
 import RichText from '@/components/RichText'
@@ -7,7 +6,7 @@ import { Contact } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import React, { Fragment } from 'react'
 
-export const ContactBlock: React.FC<{}> = async ({}) => {
+export const ContactBlock: React.FC<{}> = async () => {
   const contactData: Contact = await getCachedGlobal('contact', 1)()
   return (
     <div className="container prose">
