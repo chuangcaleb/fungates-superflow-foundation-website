@@ -136,7 +136,11 @@ export const Nav: GlobalConfig = {
             link({
               appearances: false,
               overrides: {
-                admin: { condition: variantCondition('single') },
+                admin: {
+                  condition: variantCondition('single'),
+                  description:
+                    'Single links at root, are not displayed in header menu, nor in mobile navigation sheet.',
+                },
               },
             }),
             {
