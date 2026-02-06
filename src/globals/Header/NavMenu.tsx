@@ -114,7 +114,7 @@ export const NavMenu = ({ nav }: { nav: Nav }) => {
 
   return (
     <NavigationMenu className="hidden lg:block">
-      <NavigationMenuList data-theme="light">
+      <NavigationMenuList>
         {navItems.map(({ item: navItem, id }) => (
           <RootItem item={navItem} key={id} />
         ))}

@@ -13,7 +13,8 @@
     font-weight: unset;
   }
 
-  :root {
+  :root,
+  [data-theme='light'] {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 

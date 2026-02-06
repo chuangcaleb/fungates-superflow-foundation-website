@@ -1845,6 +1845,9 @@ export interface Nav {
         item: {
           variant?: ('single' | 'multi' | 'group') | null;
           label?: string | null;
+          /**
+           * Single links at root, are not displayed in header menu, nor in mobile navigation sheet.
+           */
           link?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;

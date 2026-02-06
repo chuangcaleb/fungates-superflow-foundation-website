@@ -18,7 +18,7 @@ const NavSheet = ({ nav }: { nav: Nav }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">
+        <Button variant="ghost" className="text-foreground">
           <ListIcon size={20} weight="bold" />
         </Button>
       </SheetTrigger>
