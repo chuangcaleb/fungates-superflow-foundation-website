@@ -14,7 +14,7 @@ export const MultiRowLabel: React.FC<RowLabelProps> = () => {
       NonNullable<NonNullable<NonNullable<Nav['items']>[number]['item']>['links']>[number]
     >()
 
-  return data?.link.label
+  return data?.link?.label
 }
 
 export const GroupRowLabel: React.FC<RowLabelProps> = () => {
