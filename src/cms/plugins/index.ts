@@ -1,3 +1,4 @@
+import { WEBSITE_TITLE } from '@/app/constants'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
@@ -17,7 +18,7 @@ import { authenticated } from '@/cms/access/authenticated'
 import { getMinRoleLevel } from '@/cms/access/role/getMinRoleLevel'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? `${doc.title} | ${WEBSITE_TITLE}` : WEBSITE_TITLE
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {

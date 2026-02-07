@@ -1,7 +1,7 @@
 {
-  "name": "with-vercel-website",
+  "name": "fungates-superflow-foundation-website",
   "version": "1.0.0",
-  "description": "Website template for Payload",
+  "description": "Fungates Superflow Foundation website source code. Built with PayloadCMS (Next.js) for a full frontend + admin panel (with layout builder).",
   "license": "MIT",
   "type": "module",
   "scripts": {
