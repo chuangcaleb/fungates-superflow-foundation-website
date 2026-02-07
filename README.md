@@ -1,6 +1,6 @@
 # Fungates Superflow Foundation Website
 
-This repository has the source code for the Fungates Superflow Foundation website. Both the frontend site and the admin panel are hosted together with [Payload CMS](https://payloadcms.com) (using [Next.js](https://nextjs.org) under the hood), and other modern web technologies.
+This repository has the source code for the Fungates Superflow Foundation website. Both the frontend site and the admin panel (with layout builder) are hosted together with [Payload CMS](https://payloadcms.com) (using [Next.js](https://nextjs.org) under the hood), and other modern web technologies.
 
 ## Tech Stack
 
