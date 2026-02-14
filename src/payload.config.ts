@@ -18,6 +18,7 @@ import { Contact } from '@/globals/Contact/config'
 import { Nav } from '@/globals/Nav/config'
 import { plugins } from '@/cms/plugins'
 import { getServerSideURL } from '@/utilities/getURL'
+import Team from './globals/Team/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -67,19 +68,17 @@ export default buildConfig({
         push: false,
         migrationDir: 'src/cms/migrations',
       }),
-  collections: [Pages, Posts, Media, Categories, Staff, StaffGroups, Users],
+  collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,
     vercelBlobStorage({
       enabled: !!process.env.VERCEL,
-      collections: {
-        media: true,
-      },
+      collections: { media: true },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
-  globals: [Contact, Nav],
+  globals: [Contact, Nav, Team],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

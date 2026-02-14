@@ -21,6 +21,8 @@ import * as migration_20260203_035021_nav_only_in_footer from './20260203_035021
 import * as migration_20260203_050710_create_staff_and_groups from './20260203_050710_create_staff_and_groups';
 import * as migration_20260203_053748_add_pages_teams_block from './20260203_053748_add_pages_teams_block';
 import * as migration_20260203_062155_staff_unique_user from './20260203_062155_staff_unique_user';
+import * as migration_20260214_053524_remove_team_collection from './20260214_053524_remove_team_collection';
+import * as migration_20260214_060133_add_team_global from './20260214_060133_add_team_global';
 
 export const migrations = [
   {
@@ -136,6 +138,16 @@ export const migrations = [
   {
     up: migration_20260203_062155_staff_unique_user.up,
     down: migration_20260203_062155_staff_unique_user.down,
-    name: '20260203_062155_staff_unique_user'
+    name: '20260203_062155_staff_unique_user',
+  },
+  {
+    up: migration_20260214_053524_remove_team_collection.up,
+    down: migration_20260214_053524_remove_team_collection.down,
+    name: '20260214_053524_remove_team_collection',
+  },
+  {
+    up: migration_20260214_060133_add_team_global.up,
+    down: migration_20260214_060133_add_team_global.down,
+    name: '20260214_060133_add_team_global'
   },
 ];

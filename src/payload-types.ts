@@ -71,8 +71,6 @@ export interface Config {
     posts: Post;
     media: Media;
     categories: Category;
-    staff: Staff;
-    'staff-groups': StaffGroup;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -95,8 +93,6 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    staff: StaffSelect<false> | StaffSelect<true>;
-    'staff-groups': StaffGroupsSelect<false> | StaffGroupsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -116,10 +112,12 @@ export interface Config {
   globals: {
     contact: Contact;
     nav: Nav;
+    team: Team;
   };
   globalsSelect: {
     contact: ContactSelect<false> | ContactSelect<true>;
     nav: NavSelect<false> | NavSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
   };
   locale: null;
   user: User & {
@@ -429,7 +427,7 @@ export interface User {
    */
   image?: (number | null) | Media;
   /**
-   * (1) You cannot change your own role. (2) Admins can only manage the "Editor", "Author" and "None" roles.
+   * (1) You cannot change your own role. (2) Admins can only manage Users with the "Editor", "Author" and "None" roles.
    */
   role: 'superadmin' | 'admin' | 'editor' | 'author' | 'none';
   updatedAt: string;
@@ -813,60 +811,6 @@ export interface TeamBlock {
   blockType: 'team';
 }
 /**
- * Staff members to display on the "Teams" page. Not used for admin/user log-in. Must belong to a Staff Group in order to be displayed.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "staff".
- */
-export interface Staff {
-  id: number;
-  name: string;
-  title: string;
-  /**
-   * Select the Staff Group this staff belongs to. Each staff MUST belong to exactly one group.
-   */
-  group: number | StaffGroup;
-  message?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * If empty and `user` is linked, the User image will be used. Prefer 1:1 square-ratio images.
-   */
-  image?: (number | null) | Media;
-  /**
-   * Optional: link this staff entry to a `users` account (to re-use the profile image). Leave empty for staff without a user login account.
-   */
-  user?: (number | null) | User;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "staff-groups".
- */
-export interface StaffGroup {
-  id: number;
-  label: string;
-  /**
-   * When unchecked, the group will be hidden from the public Team page
-   */
-  showOnTeam?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -1071,14 +1015,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
-      } | null)
-    | ({
-        relationTo: 'staff';
-        value: number | Staff;
-      } | null)
-    | ({
-        relationTo: 'staff-groups';
-        value: number | StaffGroup;
       } | null)
     | ({
         relationTo: 'users';
@@ -1444,30 +1380,6 @@ export interface CategoriesSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "staff_select".
- */
-export interface StaffSelect<T extends boolean = true> {
-  name?: T;
-  title?: T;
-  group?: T;
-  message?: T;
-  image?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "staff-groups_select".
- */
-export interface StaffGroupsSelect<T extends boolean = true> {
-  label?: T;
-  showOnTeam?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1920,6 +1832,52 @@ export interface Nav {
   createdAt?: string | null;
 }
 /**
+ * Team members to display on the "Teams" page. Not used for admin/user log-in.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team".
+ */
+export interface Team {
+  id: number;
+  groups: {
+    label: string;
+    members: {
+      member: {
+        name: string;
+        title?: string | null;
+        message?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Prefer to leave unchecked, and link to an existing `users` account (to re-use the profile image).
+         */
+        isCustomPhoto: boolean;
+        /**
+         * Prefer 1:1 square-ratio images.
+         */
+        customPhoto?: (number | null) | Media;
+        user?: (number | null) | User;
+      };
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact_select".
  */
@@ -2021,6 +1979,36 @@ export interface NavSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team_select".
+ */
+export interface TeamSelect<T extends boolean = true> {
+  groups?:
+    | T
+    | {
+        label?: T;
+        members?:
+          | T
+          | {
+              member?:
+                | T
+                | {
+                    name?: T;
+                    title?: T;
+                    message?: T;
+                    isCustomPhoto?: T;
+                    customPhoto?: T;
+                    user?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };
