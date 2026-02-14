@@ -45,7 +45,7 @@ export const Users: CollectionConfig = {
       required: true,
       admin: {
         description:
-          '(1) You cannot change your own role. (2) Admins can only manage the "Editor", "Author" and "None" roles.',
+          '(1) You cannot change your own role. (2) Admins can only manage Users with the "Editor", "Author" and "None" roles.',
         // TODO: low priority, custom component to restrict options
       },
       options: [

@@ -93,7 +93,7 @@ export const Staff: CollectionConfig = {
           admin: {
             width: '50%',
             description:
-              'Optional: link this staff entry to a `users` account (to re-use the profile image). Leave empty for staff without a user login account.',
+              'Prefer to link this Staff entry to a `users` account (to re-use the profile image). Leave empty for staff without a user login account.',
           },
         },
       ],
