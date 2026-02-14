@@ -9,11 +9,10 @@ export const MemberCard = ({
 }: {
   member: Team['groups'][number]['members'][number]['member']
 }) => {
-  console.log(member)
   if (!!member.message && !isEmptyRichText(member.message)) {
     return (
       <div className="not-prose col-span-full flex-row flex-wrap gap-6 space-y-8 lg:flex lg:gap-16 lg:space-y-0">
-        <div className="max-w-80">
+        <div className="max-w-96 flex-1">
           {member.isCustomPhoto ? (
             <Media
               imgClassName="rounded-full aspect-square w-full object-cover"
@@ -23,8 +22,8 @@ export const MemberCard = ({
             <Image
               src="/not-found.png"
               alt="No profile image"
-              width={224}
-              height={224}
+              width={512}
+              height={512}
               className="aspect-square w-full rounded-lg object-cover"
             />
           )}
@@ -56,8 +55,8 @@ export const MemberCard = ({
         <Image
           src="/not-found.png"
           alt="No profile image"
-          width={224}
-          height={224}
+          width={512}
+          height={512}
           className="aspect-square w-full rounded-lg object-cover"
         />
       )}
