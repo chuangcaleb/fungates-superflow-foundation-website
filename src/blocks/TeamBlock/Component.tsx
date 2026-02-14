@@ -1,20 +1,14 @@
-import config from '@payload-config'
-import { getPayload } from 'payload'
 import React from 'react'
 
-import type { Staff, StaffGroup } from '@/payload-types'
-import { StaffCard } from './StaffCard'
+import type { Team } from '@/payload-types'
+import { getCachedGlobal } from '@/utilities/getGlobals'
+import { MemberCard } from './MemberCard'
 
 export const TeamBlock: React.FC<{}> = async () => {
-  const payload = await getPayload({ config })
+  // @ts-ignore
+  const team: Team = await getCachedGlobal('team', 1)()
 
-  const { docs: staffGroups } = await payload.find({
-    collection: 'staff-groups',
-    where: { showOnTeam: { equals: true } },
-    depth: 0,
-  })
-
-  if (!staffGroups || staffGroups.length === 0) {
+  if (!team || team.groups.length === 0) {
     return (
       <div className="container prose">
         <h2 className="sr-only">Our Team</h2>
@@ -23,27 +17,15 @@ export const TeamBlock: React.FC<{}> = async () => {
     )
   }
 
-  // Fetch staff for each group
-  const groupsWithStaff = await Promise.all(
-    staffGroups.map(async (group: StaffGroup) => {
-      const { docs: staff } = await payload.find({
-        collection: 'staff',
-        where: { group: { equals: group.id } },
-        depth: 2,
-      })
-      return { ...group, staff }
-    }),
-  )
-
   return (
     <div className="container prose space-y-20">
       <h2 className="sr-only">Our Team</h2>
-      {groupsWithStaff.map((group) => (
+      {team.groups.map((group) => (
         <div key={group.id} className="space-y-8">
           <h3 className="text-2xl font-semibold">{group.label}</h3>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-10 md:gap-12 lg:grid-cols-4 lg:gap-14 xl:grid-cols-5 xl:gap-16">
-            {group.staff.length > 0 ? (
-              group.staff.map((staff: Staff) => <StaffCard key={staff.id} staff={staff} />)
+            {group.members.length > 0 ? (
+              group.members.map(({ id, member }) => <MemberCard key={id} member={member} />)
             ) : (
               <p className="col-span-full text-muted-foreground">No staff members in this group.</p>
             )}

@@ -7,6 +7,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { Field, GlobalConfig } from 'payload'
+import { revalidateTeam } from './hooks/revalidateTeam'
 
 const Member: Field = {
   name: 'member',
@@ -123,6 +124,9 @@ export const Team: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateTeam],
+  },
 }
 
 export default Team
