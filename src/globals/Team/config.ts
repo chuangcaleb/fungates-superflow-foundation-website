@@ -12,6 +12,7 @@ const Member: Field = {
   name: 'member',
   type: 'group',
   required: true,
+
   fields: [
     {
       type: 'row',
@@ -101,7 +102,7 @@ export const Team: GlobalConfig = {
       required: true,
       label: 'Groups',
       admin: {
-        // components: { RowLabel: '@/globals/Team/RowLabel#RowLabel' },
+        components: { RowLabel: '@/globals/Team/RowLabel#GroupRowLabel' },
       },
       fields: [
         {
@@ -114,6 +115,9 @@ export const Team: GlobalConfig = {
           name: 'members',
           type: 'array',
           required: true,
+          admin: {
+            components: { RowLabel: '@/globals/Team/RowLabel#MemberRowLabel' },
+          },
           fields: [Member],
         },
       ],

@@ -25,6 +25,8 @@ import { FolderTypeField as FolderTypeField_3817bf644402e67bfe6577f60ef982de } f
 import { MultiRowLabel as MultiRowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
 import { GroupRowLabel as GroupRowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
 import { RowLabel as RowLabel_54eaa63372e00750616842d6ed3f5335 } from '@/globals/Nav/RowLabel'
+import { MemberRowLabel as MemberRowLabel_3560058c4ebb2bd17ec4faf70aff3a0f } from '@/globals/Team/RowLabel'
+import { GroupRowLabel as GroupRowLabel_3560058c4ebb2bd17ec4faf70aff3a0f } from '@/globals/Team/RowLabel'
 import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 
@@ -56,6 +58,8 @@ export const importMap = {
   "@/globals/Nav/RowLabel#MultiRowLabel": MultiRowLabel_54eaa63372e00750616842d6ed3f5335,
   "@/globals/Nav/RowLabel#GroupRowLabel": GroupRowLabel_54eaa63372e00750616842d6ed3f5335,
   "@/globals/Nav/RowLabel#RowLabel": RowLabel_54eaa63372e00750616842d6ed3f5335,
+  "@/globals/Team/RowLabel#MemberRowLabel": MemberRowLabel_3560058c4ebb2bd17ec4faf70aff3a0f,
+  "@/globals/Team/RowLabel#GroupRowLabel": GroupRowLabel_3560058c4ebb2bd17ec4faf70aff3a0f,
   "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e,
   "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }
